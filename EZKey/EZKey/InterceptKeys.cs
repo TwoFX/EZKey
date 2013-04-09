@@ -15,6 +15,7 @@ namespace EZKey
     {
         private const int WH_KEYBOARD_LL = 13;
         private const int WM_KEYDOWN = 0x0100;
+        private const int WM_KEYUP = 0x0101;
         private static LowLevelKeyboardProc _proc = HookCallback;
         private static IntPtr _hookID = IntPtr.Zero;
 
@@ -47,8 +48,12 @@ namespace EZKey
             if (nCode >= 0 && wParam == (IntPtr)WM_KEYDOWN)
             {
                 int vkCode = Marshal.ReadInt32(lParam);
-                Manager.KeyDetected(vkCode);
-
+                Manager.TriggerKeyDown(vkCode);
+            }
+            else if (nCode >= 0 && wParam == (IntPtr)WM_KEYUP)
+            {
+                int vkCode = Marshal.ReadInt32(lParam);
+                Manager.TriggerKeyUp(vkCode);
             }
             return CallNextHookEx(_hookID, nCode, wParam, lParam);
         }
