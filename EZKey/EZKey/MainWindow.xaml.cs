@@ -50,6 +50,7 @@ namespace EZKey
 
             Manager.KeyDown += DisplayKeyDown;
             Manager.KeyUp += DisplayKeyUp;
+            Manager.OptionChanged += setOptions;
 
             Manager.Background = Colors.White;
             Manager.Foreground = Colors.White;
@@ -59,13 +60,14 @@ namespace EZKey
             Manager.Text = Colors.Black;
             Manager.TextPressed = Colors.White;
 
-            Manager.Size = 30;
-            Manager.Roundness = 3.75;
-            Manager.BorderThickness = 0.7;
-            Manager.BasicOffsetX = 20;
-            Manager.OffsetX = 9;
-            Manager.BasicOffsetX = 20;
-            Manager.OffsetY = 5;
+            Manager.Size = 
+                Manager.Roundness = 
+                Manager.BorderThickness = 
+                Manager.BasicOffsetX = 
+                Manager.OffsetX = 
+                Manager.BasicOffsetY = 
+                Manager.OffsetY = 
+                0.25;
 
             
 
@@ -109,10 +111,10 @@ namespace EZKey
                 {
                     Rectangle c = keyLayout[i]; // I shall call it "The conveniance variable" (because keyLayout[i] is way too fucking long) [once again]
                     c.Fill = new SolidColorBrush(Manager.Foreground);
-                    c.StrokeThickness = Manager.BorderThickness;
+                    c.StrokeThickness = Manager.BorderThickness * 2.8;
                     c.Stroke = new SolidColorBrush(Manager.Border);
-                    c.Height = c.Width = Manager.Size;
-                    c.RadiusX = c.RadiusY = Manager.Roundness;
+                    c.Height = c.Width = Manager.Size * 120.0;
+                    c.RadiusX = c.RadiusY = Manager.Roundness * 15.0;
                     int o;
                     switch (i % 4)
                     {
@@ -126,25 +128,27 @@ namespace EZKey
                             o = i % 4;
                             break;
                     }
-                    c.Margin = new Thickness(Manager.BasicOffsetX + i * Manager.OffsetX, Manager.BasicOffsetY + o * Manager.OffsetY + (o - 1) * Manager.Size, 0, 0);
+                    c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + i * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + o * Manager.OffsetY * 20.0 + (o - 1) * Manager.Size * 120.0, 0, 0);
                 }
             }
         }
 
         private void DisplayKeyDown(int KeyCode)
         {
-            keyLayout[0].Fill = Brushes.Black;
+            keyLayout[0].Fill = new SolidColorBrush(Manager.ForegroundPressed);
         }
 
         private void DisplayKeyUp(int KeyCode)
         {
-            keyLayout[0].Fill = Brushes.White;
+            keyLayout[0].Fill = new SolidColorBrush(Manager.Foreground);
         }
 
         private void Window_MouseDown_1(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
+            else if (e.ChangedButton == MouseButton.Middle)
+                new Options().Show();
         }
     }
 }

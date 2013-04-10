@@ -10,10 +10,11 @@ namespace EZKey
     static class Manager
     {
         public delegate void KeyHandler(int KeyCode);
+        public delegate void OptionChangedHandler();
+        public static OptionChangedHandler OptionChanged;
         public static KeyHandler KeyUp, KeyDown;
         public static Color Background, Foreground, ForegroundPressed, Text, TextPressed, Border, BorderPressed;
-        public static double BorderThickness, Roundness; // Is Roundness a word? Whatever..
-        public static int Size, OffsetX, OffsetY, BasicOffsetX, BasicOffsetY;
+        public static double BorderThickness, Roundness, Size, OffsetX, OffsetY, BasicOffsetX, BasicOffsetY; // Is Roundness a word? Whatever..
 
         public static void TriggerKeyDown(int KeyCode)
         {
@@ -28,6 +29,14 @@ namespace EZKey
             if (KeyUp != null)
             {
                 KeyUp(KeyCode);
+            }
+        }
+
+        public static void TriggerOptionChanged()
+        {
+            if (OptionChanged != null)
+            {
+                OptionChanged();
             }
         }
     }

@@ -23,5 +23,11 @@ namespace EZKey
         {
             InitializeComponent();
         }
+
+        private void Slider_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Manager.Roundness = e.NewValue;
+            Manager.TriggerOptionChanged();
+        }
     }
 }
