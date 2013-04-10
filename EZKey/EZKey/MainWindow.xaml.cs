@@ -26,26 +26,17 @@ namespace EZKey
         //private int lastCode = 0;
         private Rectangle[] keyLayout;
         private Dictionary<int, Rectangle> findFromCode;
-        private Color xyzColor;
-        private int s, t;
-        private double m;
 
         public MainWindow()
         {
 
             keyLayout = new Rectangle[47];
             findFromCode = new Dictionary<int, Rectangle>();
-            m = 1.0;
-            s = 30;
-            t = 5;
-         
-
             InitializeComponent();
         }
 
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
-            //this.WindowStyle = WindowStyle.None;
             InterceptKeys.Load();
 
             Manager.KeyDown += DisplayKeyDown;
@@ -67,15 +58,13 @@ namespace EZKey
                 Manager.OffsetX = 
                 Manager.BasicOffsetY = 
                 Manager.OffsetY = 
-                0.25;
-
-            
+                0.25; 
 
             for (int i = 0; i < 47; i++)
             {
                 if (i != 1 && i != 45)
                 {
-                    Rectangle c = new Rectangle(); // I shall call it "The conveniance variable" (because keyLayout[i] is way too fucking long)
+                    Rectangle c = new Rectangle(); // I shall call it "The conveniance variable" (because keyLayout[i] is way too fucking long) ... Totally abusing reference types :D
                     keyLayout[i] = c;
                     c.HorizontalAlignment = HorizontalAlignment.Left;
                     c.VerticalAlignment = VerticalAlignment.Top;
@@ -84,23 +73,6 @@ namespace EZKey
             }
 
             setOptions();
-            
-            
-            
-
-            //keyLayout.Add(new Rectangle());
-            //keyLayout[0].HorizontalAlignment = HorizontalAlignment.Left;
-            //keyLayout[0].VerticalAlignment = VerticalAlignment.Top;
-            //keyLayout[0].Fill = Brushes.White;
-            //keyLayout[0].StrokeThickness = 0.7;
-            //keyLayout[0].Stroke = Brushes.Black;
-            //keyLayout[0].Height = 30;
-            //keyLayout[0].Width = 30;
-            //keyLayout[0].RadiusX = 30 / 8.0;
-            //keyLayout[0].RadiusY = 30 / 8.0;
-            //keyLayout[0].Margin = new Thickness(70, 70, 0, 0);
-            //keyLayout[0].StrokeThickness = 30 / 20.0;
-            //grid.Children.Add(keyLayout[0]);
         }
 
         private void setOptions()
@@ -149,6 +121,28 @@ namespace EZKey
                 this.DragMove();
             else if (e.ChangedButton == MouseButton.Middle)
                 new Options().Show();
+        }
+
+        private void Label_MouseDown_1(object sender, MouseButtonEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void grid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            lblMini.Visibility = Visibility.Visible;
+            lblClose.Visibility = Visibility.Visible;
+        }
+
+        private void grid_MouseLeave(object sender, MouseEventArgs e)
+        {
+            lblMini.Visibility = Visibility.Hidden;
+            lblClose.Visibility = Visibility.Hidden;
+        }
+
+        private void lblClose_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
