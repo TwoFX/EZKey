@@ -39,8 +39,8 @@ namespace EZKey
         {
             InterceptKeys.Load();
 
-            Manager.KeyDown += DisplayKeyDown;
-            Manager.KeyUp += DisplayKeyUp;
+            Manager.KeyDown += displayKeyDown;
+            Manager.KeyUp += displayKeyUp;
             Manager.OptionChanged += setOptions;
 
             Manager.Background = Colors.White;
@@ -71,7 +71,6 @@ namespace EZKey
                     grid.Children.Add(c);
                 }
             }
-
             setOptions();
         }
 
@@ -105,12 +104,12 @@ namespace EZKey
             }
         }
 
-        private void DisplayKeyDown(int KeyCode)
+        private void displayKeyDown(int KeyCode)
         {
             keyLayout[0].Fill = new SolidColorBrush(Manager.ForegroundPressed);
         }
 
-        private void DisplayKeyUp(int KeyCode)
+        private void displayKeyUp(int KeyCode)
         {
             keyLayout[0].Fill = new SolidColorBrush(Manager.Foreground);
         }
