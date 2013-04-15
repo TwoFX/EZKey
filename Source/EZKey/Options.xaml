@@ -1,0 +1,8 @@
+﻿<Window x:Class="EZKey.Options"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Options" Height="300" Width="634">
+    <Grid>
+        <Slider HorizontalAlignment="Left" Margin="238,106,0,0" VerticalAlignment="Top" Width="334" Maximum="1" ValueChanged="Slider_ValueChanged_1" Value="0.25"/>
+    </Grid>
+</Window>
