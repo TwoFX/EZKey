@@ -15,7 +15,7 @@ TestResults
 
 # Build results
 [Dd]ebug/
-[Rr]elease/
+Source/EZKey/bin/[Rr]elease/
 x64/
 *_i.c
 *_p.c

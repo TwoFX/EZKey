@@ -25,13 +25,13 @@ namespace EZKey
     {
         //private int lastCode = 0;
         private Rectangle[] keyLayout;
-        private Dictionary<int, Rectangle> findFromCode;
+        private Dictionary<int, int> Layout;
 
         public MainWindow()
         {
 
             keyLayout = new Rectangle[47];
-            findFromCode = new Dictionary<int, Rectangle>();
+            Layout = Manager.Layout;
             InitializeComponent();
         }
 
@@ -102,16 +102,21 @@ namespace EZKey
                     c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + i * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + o * Manager.OffsetY * 20.0 + (o - 1) * Manager.Size * 120.0, 0, 0);
                 }
             }
+
+            Layout = Manager.Layout;
         }
 
         private void displayKeyDown(int KeyCode)
         {
-            keyLayout[0].Fill = new SolidColorBrush(Manager.ForegroundPressed);
+            //this.Dispatcher.BeginInvoke(new Action(() => { keyLayout[Layout[KeyCode]].Fill = new SolidColorBrush(Manager.ForegroundPressed); }));
+            keyLayout[Layout[KeyCode]].Fill = new SolidColorBrush(Manager.ForegroundPressed);
+            //MessageBox.Show("Pressed!");
         }
 
         private void displayKeyUp(int KeyCode)
         {
-            keyLayout[0].Fill = new SolidColorBrush(Manager.Foreground);
+            //this.Dispatcher.BeginInvoke(new Action(() => { keyLayout[Layout[KeyCode]].Fill = new SolidColorBrush(Manager.Foreground); }));
+            keyLayout[Layout[KeyCode]].Fill = new SolidColorBrush(Manager.Foreground);
         }
 
         private void Window_MouseDown_1(object sender, MouseButtonEventArgs e)

@@ -15,6 +15,7 @@ namespace EZKey
         public static KeyHandler KeyUp, KeyDown;
         public static Color Background, Foreground, ForegroundPressed, Text, TextPressed, Border, BorderPressed;
         public static double BorderThickness, Roundness, Size, OffsetX, OffsetY, BasicOffsetX, BasicOffsetY; // Is Roundness a word? Whatever..
+        public static Dictionary<int, int> Layout = LanguagePacks.enUS;
 
         public static void TriggerKeyDown(int KeyCode)
         {
