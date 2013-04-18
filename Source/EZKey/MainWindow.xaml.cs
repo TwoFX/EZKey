@@ -127,26 +127,19 @@ namespace EZKey
                 new Options().Show();
         }
 
-        private void Label_MouseDown_1(object sender, MouseButtonEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
-
         private void grid_MouseEnter(object sender, MouseEventArgs e)
         {
-            lblMini.Visibility = Visibility.Visible;
-            lblClose.Visibility = Visibility.Visible;
+            lblOptions.Visibility = Visibility.Visible;
         }
 
         private void grid_MouseLeave(object sender, MouseEventArgs e)
         {
-            lblMini.Visibility = Visibility.Hidden;
-            lblClose.Visibility = Visibility.Hidden;
+            lblOptions.Visibility = Visibility.Hidden;
         }
 
         private void lblClose_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Application.Current.Shutdown();
+            new Options().Show();
         }
     }
 }
