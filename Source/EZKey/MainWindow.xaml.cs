@@ -26,7 +26,7 @@ namespace EZKey
         //private int lastCode = 0;
         private Rectangle[] keyLayout;
         private Dictionary<int, int> Layout;
-        private int keyDex = 55;
+        private int keyDex = 58;
 
         public MainWindow()
         {
@@ -146,6 +146,21 @@ namespace EZKey
                                 c.Height = Manager.Size * 120.0;
                                 c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 7 + 3;
                                 c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i - 5) * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 4 + Manager.Size * 120 * 3, 0, 0);
+                                break;
+                            case 55: // Left Ctrl Key
+                                c.Height = Manager.Size * 120.0;
+                                c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 2;
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 5 + Manager.Size * 120 * 4, 0, 0);
+                                break;
+                            case 56: // Space Bar
+                                c.Height = Manager.Size * 120.0;
+                                c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 44;
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + 6 * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 5 + Manager.Size * 120 * 4, 0, 0);
+                                break;
+                            case 57: // Right Ctrl Key
+                                c.Height = Manager.Size * 120.0;
+                                c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 2 + 3;
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i - 3) * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 5 + Manager.Size * 120 * 4, 0, 0);
                                 break;
                         }
                     }

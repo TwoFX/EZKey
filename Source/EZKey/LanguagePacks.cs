@@ -65,8 +65,9 @@ namespace EZKey
             { 0x0D, 52 }, // Enter Key
             { 0xA0, 53 }, // Left Shift Key
             { 0xA1, 54 }, // Right Shift Key
-            //{ 0xDD, 55 }, // ] Key
-            //{ 0xDD, 46 } // ] Key
+            { 0xA2, 55 }, // Left Ctrl Key
+            { 0x20, 56 }, // Space Bar
+            { 0xA3, 57 } // Right Ctrl Key
 
 
 
