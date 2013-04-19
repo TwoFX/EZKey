@@ -56,7 +56,19 @@ namespace EZKey
             { 0xDE, 43 }, // ' Key
             { 0xBB, 44 }, // + Key
             // No KeyID=45 on enUS Layout
-            { 0xDD, 46 } // ] Key
+            { 0xDD, 46 }, // ] Key
+            { 0xC0, 47 }, // ~ Key
+            { 0x08, 48 }, // Backspace Key
+            { 0x09, 49 }, // Tab Key
+            { 0xDC, 50 }, // \ Key
+            { 0x14, 51 }, // Caps Key
+            { 0x0D, 52 }, // Enter Key
+            { 0xA0, 53 }, // Left Shift Key
+            { 0xA1, 54 }, // Right Shift Key
+            //{ 0xDD, 55 }, // ] Key
+            //{ 0xDD, 46 } // ] Key
+
+
 
         };
     }
