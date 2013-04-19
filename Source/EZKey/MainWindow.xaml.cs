@@ -25,13 +25,16 @@ namespace EZKey
     {
         //private int lastCode = 0;
         private Rectangle[] keyLayout;
+        private Label[] lblLayout;
         private Dictionary<int, int> Layout;
-        private int keyDex = 58;
+        private string[] lbls = Manager.Lables;
+        private int keyDex = 71;
 
         public MainWindow()
         {
 
             keyLayout = new Rectangle[keyDex];
+            lblLayout = new Label[keyDex];
             Layout = Manager.Layout;
             InitializeComponent();
         }
@@ -59,6 +62,7 @@ namespace EZKey
                 Manager.OffsetX = 
                 Manager.BasicOffsetY = 
                 Manager.OffsetY = 
+                Manager.tOffsetY =
                 0.25; 
 
             for (int i = 0; i < keyDex; i++)
@@ -70,7 +74,16 @@ namespace EZKey
                     c.HorizontalAlignment = HorizontalAlignment.Left;
                     c.VerticalAlignment = VerticalAlignment.Top;
                     grid.Children.Add(c);
+                    Label l = new Label();
+                    lblLayout[i] = l;
+                    l.FontSize -= .5;
+                    l.HorizontalAlignment = HorizontalAlignment.Left;
+                    l.VerticalAlignment = VerticalAlignment.Top;
+                    l.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+                    l.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+                    grid.Children.Add(l);
                 }
+                
             }
             setOptions();
         }
@@ -102,75 +115,103 @@ namespace EZKey
                                 o = i % 4;
                                 break;
                         }
-                        c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i + 4) * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + o * Manager.OffsetY * 20.0 + (o - 1) * Manager.Size * 120.0, 0, 0);
+                        c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i + 4) * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + o * Manager.OffsetY * 20.0 + o * Manager.Size * 120.0 + Manager.tOffsetY * 25, 0, 0);
                     }
-                    else
+                    else if (i < 58)
                     {
                         switch (i)
                         {
                             case 47: // ~ Key
                                 c.Height = c.Width = Manager.Size * 120.0;
-                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0, Manager.BasicOffsetY * 80.0 + Manager.OffsetY * 20.0, 0, 0);
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0, Manager.BasicOffsetY * 80.0 + Manager.OffsetY * 20.0 + Manager.Size * 120 + Manager.tOffsetY * 25, 0, 0);
                                 break;
                             case 48: // Backspace Key
                                 c.Height = Manager.Size * 120.0;
-                                c.Width = Manager.Size * 120.0 * 2 + Manager.OffsetX * 36.0;
-                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i + 4) * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + Manager.OffsetY * 20.0, 0, 0);
+                                c.Width = Manager.Size * 120.0 * 2 + Manager.OffsetX * 36.0 - 3;
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i + 4) * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + Manager.OffsetY * 20.0 + Manager.Size * 120 + Manager.tOffsetY * 25, 0, 0);
                                 break;
                             case 49: // Tab Key
                                 c.Height = Manager.Size * 120.0;
                                 c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 2;
-                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 2 + Manager.Size * 120, 0, 0);
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 2 + Manager.Size * 120 * 2 + Manager.tOffsetY * 25, 0, 0);
                                 break;
                             case 50: // \ Key
                                 c.Height = Manager.Size * 120.0;
-                                c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 2 + 3;
-                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i + 4) * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 2 + Manager.Size * 120, 0, 0);
+                                c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 2;
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i + 4) * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 2 + Manager.Size * 120 * 2 + Manager.tOffsetY * 25, 0, 0);
                                 break;
                             case 51: // Caps Key
                                 c.Height = Manager.Size * 120.0;
                                 c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 3;
-                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 3 + Manager.Size * 120 * 2, 0, 0);
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 3 + Manager.Size * 120 * 3 + Manager.tOffsetY * 25, 0, 0);
                                 break;
                             case 52: // Enter Key
                                 c.Height = Manager.Size * 120.0;
-                                c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 5 + 3;
-                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i - 1) * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 3 + Manager.Size * 120 * 2, 0, 0);
+                                c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 5;
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i - 1) * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 3 + Manager.Size * 120 * 3 + Manager.tOffsetY * 25, 0, 0);
                                 break;
                             case 53: // Left Shift Key
                                 c.Height = Manager.Size * 120.0;
                                 c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 5;
-                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 4 + Manager.Size * 120 * 3, 0, 0);
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 4 + Manager.Size * 120 * 4 + Manager.tOffsetY * 25, 0, 0);
                                 break;
                             case 54: // Right Shift Key
                                 c.Height = Manager.Size * 120.0;
-                                c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 7 + 3;
-                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i - 5) * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 4 + Manager.Size * 120 * 3, 0, 0);
+                                c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 7;
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i - 5) * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 4 + Manager.Size * 120 * 4 + Manager.tOffsetY * 25, 0, 0);
                                 break;
                             case 55: // Left Ctrl Key
                                 c.Height = Manager.Size * 120.0;
                                 c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 2;
-                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 5 + Manager.Size * 120 * 4, 0, 0);
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 5 + Manager.Size * 120 * 5 + Manager.tOffsetY * 25, 0, 0);
                                 break;
                             case 56: // Space Bar
                                 c.Height = Manager.Size * 120.0;
                                 c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 44;
-                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + 6 * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 5 + Manager.Size * 120 * 4, 0, 0);
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + 6 * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 5 + Manager.Size * 120 * 5 + Manager.tOffsetY * 25, 0, 0);
                                 break;
                             case 57: // Right Ctrl Key
                                 c.Height = Manager.Size * 120.0;
-                                c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 2 + 3;
-                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i - 3) * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 5 + Manager.Size * 120 * 4, 0, 0);
+                                c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 2;
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i - 3) * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0 + Manager.BasicOffsetY * 20.0 * 5 + Manager.Size * 120 * 5 + Manager.tOffsetY * 25, 0, 0);
                                 break;
                         }
                     }
+                    else if (i < 70) // F1 - F12
+                    {
+                        c.Height = c.Width = Manager.Size * 120.0;
+                        int ao = 0;
+                        int s = Convert.ToInt32(Math.Floor((i - 58) / 4.0));
+                        switch (s)
+                        {
+                            case 1:
+                                ao = 2;
+                                break;
+                            case 2:
+                                ao = 4;
+                                break;
+                            default:
+                                break;
+                        }
+                        c.Margin = new Thickness(Manager.BasicOffsetY * 80.0 + (8 + i * 4 - 232 + ao) * Manager.OffsetX * 36.0, Manager.BasicOffsetY * 80.0, 0, 0);
+                    }
+                    else // Escape Key
+                    {
+                        c.Height = c.Width = Manager.Size * 120.0;
+                        c.Margin = new Thickness(Manager.BasicOffsetX * 80.0, Manager.BasicOffsetY * 80.0, 0, 0);
+                    }
+                    Label l = lblLayout[i];
+                    l.Content = lbls[i];
+                    l.Width = c.Width;
+                    l.Height = c.Height;
+                    l.Margin = new Thickness(c.Margin.Left, c.Margin.Top, 0, 0);
                 }
+                
             }
-            //MessageBox.Show(keyLayout.Max(x => x == null ? 0 : x.Margin.Left + x.Width).ToString());
-            //MessageBox.Show((keyLayout[48].Margin.Left + keyLayout[48].Width).ToString());
-            this.grid.Width = keyLayout.Max(x => x == null ? 0 : x.Margin.Left + x.Width) + 15;
-            this.grid.Height = keyLayout.Max(x => x == null ? 0 : x.Margin.Top + x.Height) + 15;
 
+
+            this.grid.Width = keyLayout.Max(x => x == null ? 0 : x.Margin.Left + x.Width) + 25;
+            this.grid.Height = keyLayout.Max(x => x == null ? 0 : x.Margin.Top + x.Height) + 25;
             Layout = Manager.Layout;
         }
 

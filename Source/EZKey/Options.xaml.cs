@@ -19,15 +19,22 @@ namespace EZKey
     /// </summary>
     public partial class Options : Window
     {
+
+        bool initialized = false;
         public Options()
         {
             InitializeComponent();
+            sldrRoundness.Value = Manager.Roundness;
+            initialized = true;
         }
 
         private void Slider_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            Manager.Roundness = e.NewValue;
-            Manager.TriggerOptionChanged();
+            if (initialized)
+            {
+                Manager.Roundness = e.NewValue;
+                Manager.TriggerOptionChanged();
+            }
         }
     }
 }

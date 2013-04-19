@@ -67,10 +67,31 @@ namespace EZKey
             { 0xA1, 54 }, // Right Shift Key
             { 0xA2, 55 }, // Left Ctrl Key
             { 0x20, 56 }, // Space Bar
-            { 0xA3, 57 } // Right Ctrl Key
+            { 0xA3, 57 }, // Right Ctrl Key
+            { 0x70, 58 }, // F1 Key
+            { 0x71, 59 }, // F2 Key
+            { 0x72, 60 }, // F3 Key
+            { 0x73, 61 }, // F4 Key
+            { 0x74, 62 }, // F5 Key
+            { 0x75, 63 }, // F6 Key
+            { 0x76, 64 }, // F7 Key
+            { 0x77, 65 }, // F8 Key
+            { 0x78, 66 }, // F9 Key
+            { 0x79, 67 }, // F10 Key
+            { 0x7A, 68 }, // F11 Key
+            { 0x7B, 69 }, // F12 Key
+            { 0x1B, 70 } // Escape Key
+        };
 
-
-
+        public static string[] enUSlbl = new string[] {
+            "1", " ", "Q", "A", "2", "Z", "W", "S", "3", "X",
+            "E", "D", "4", "C", "R", "F", "5", "V", "T", "G",
+            "6", "B", "Y", "H", "7", "N", "U", "J", "8", "M",
+            "I", "K", "9", ",", "O", "L", "0", ".", "P", ";",
+            "-", "/", "[", "'", "+", " ", "]", "~", "Backspace", "Tab",
+            "\\", "Caps", "Enter", "Shift", "Shift", "Ctrl", "Space", "Ctrl",
+            "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11",
+            "F12", "Esc"
         };
     }
 }
