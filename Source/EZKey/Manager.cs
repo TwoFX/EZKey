@@ -14,7 +14,7 @@ namespace EZKey
         public static OptionChangedHandler OptionChanged;
         public static KeyHandler KeyUp, KeyDown;
         public static Color Background, Foreground, ForegroundPressed, Text, TextPressed, Border, BorderPressed;
-        public static double BorderThickness, Roundness, Size, OffsetX, OffsetY, BasicOffsetX, BasicOffsetY, tOffsetY; // Is Roundness a word? Whatever..
+        public static double BorderThickness, Roundness, Size, OffsetX, OffsetY, BasicOffsetX, BasicOffsetY, tOffsetY, FontSize; // Is Roundness a word? Whatever..
         public static Dictionary<int, int> Layout = LanguagePacks.enUS;
         public static string[] Lables = LanguagePacks.enUSlbl;
 

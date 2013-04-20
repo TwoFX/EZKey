@@ -3,6 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="EZKey Keyboard Visualization" Height="0" Width="0" FontWeight="Bold" Loaded="Window_Loaded_1" Background="#FFFFFFFF" MouseDown="Window_MouseDown_1" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
     <Grid x:Name="grid" Background="#FFDDDDDD" MouseEnter="grid_MouseEnter" MouseLeave="grid_MouseLeave">
-        <Label x:Name="lblOptions" Content="Options" HorizontalAlignment="Right" VerticalAlignment="Top" Height="17" FontWeight="Normal" Padding="0" MouseDown="lblClose_MouseDown" Visibility="Hidden" Margin="0,3,25,0" Grid.Column="1"/>
+        <Label x:Name="lblOptions" Content="Options" HorizontalAlignment="Right" VerticalAlignment="Top" Height="17" FontWeight="Normal" Padding="0" MouseDown="lblClose_MouseDown" Visibility="Hidden" Margin="0,3,0,0" Grid.Column="1" HorizontalContentAlignment="Center"/>
     </Grid>
 </Window>

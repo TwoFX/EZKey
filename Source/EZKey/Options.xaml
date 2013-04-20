@@ -7,5 +7,13 @@
         <Label Content="Size:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Slider x:Name="sldrSize" HorizontalAlignment="Left" Margin="163,10,0,0" VerticalAlignment="Top" Width="246" ValueChanged="sldrSize_ValueChanged" Maximum="1" Minimum="0.1"/>
         <Label Content="Round Edges:" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top"/>
+        <Label Content="Font Size:" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="sldrFontSize" HorizontalAlignment="Left" Margin="163,64,0,0" VerticalAlignment="Top" Width="246" ValueChanged="sldrFontSize_ValueChanged" Maximum="1" Minimum="0.1"/>
+        <Label Content="Stroke Thickness:" HorizontalAlignment="Left" Margin="10,87,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="sldrStrokeThickness" HorizontalAlignment="Left" Margin="163,91,0,0" VerticalAlignment="Top" Width="246" ValueChanged="Slider_ValueChanged" Maximum="1"/>
+        <Slider x:Name="sldrOffsetX" HorizontalAlignment="Left" Margin="163,118,0,0" VerticalAlignment="Top" Width="246" ValueChanged="sldrOffsetX_ValueChanged" Maximum="1"/>
+        <Slider x:Name="sldrOffsetY" HorizontalAlignment="Left" Margin="163,145,0,0" VerticalAlignment="Top" Width="246" ValueChanged="sldrOffsetY_ValueChanged" Maximum="1"/>
+        <Label Content="Key Offset X:" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
+        <Label Content="Key Offset Y:" HorizontalAlignment="Left" Margin="10,141,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

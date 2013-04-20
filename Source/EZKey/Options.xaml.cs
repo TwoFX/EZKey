@@ -26,6 +26,10 @@ namespace EZKey
             InitializeComponent();
             sldrRoundness.Value = Manager.Roundness;
             sldrSize.Value = Manager.Size;
+            sldrFontSize.Value = Manager.FontSize;
+            sldrStrokeThickness.Value = Manager.BorderThickness;
+            sldrOffsetX.Value = Manager.OffsetX;
+            sldrOffsetY.Value = Manager.OffsetY;
             initialized = true;
         }
 
@@ -43,6 +47,42 @@ namespace EZKey
             if (initialized)
             {
                 Manager.Size = e.NewValue;
+                Manager.TriggerOptionChanged();
+            }
+        }
+
+        private void sldrFontSize_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (initialized)
+            {
+                Manager.FontSize = e.NewValue;
+                Manager.TriggerOptionChanged();
+            }
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (initialized)
+            {
+                Manager.BorderThickness = e.NewValue;
+                Manager.TriggerOptionChanged();
+            }
+        }
+
+        private void sldrOffsetX_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (initialized)
+            {
+                Manager.OffsetX = e.NewValue;
+                Manager.TriggerOptionChanged();
+            }
+        }
+
+        private void sldrOffsetY_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (initialized)
+            {
+                Manager.OffsetY = e.NewValue;
                 Manager.TriggerOptionChanged();
             }
         }
