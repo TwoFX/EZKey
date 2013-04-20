@@ -25,6 +25,7 @@ namespace EZKey
         {
             InitializeComponent();
             sldrRoundness.Value = Manager.Roundness;
+            sldrSize.Value = Manager.Size;
             initialized = true;
         }
 
@@ -33,6 +34,15 @@ namespace EZKey
             if (initialized)
             {
                 Manager.Roundness = e.NewValue;
+                Manager.TriggerOptionChanged();
+            }
+        }
+
+        private void sldrSize_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (initialized)
+            {
+                Manager.Size = e.NewValue;
                 Manager.TriggerOptionChanged();
             }
         }
