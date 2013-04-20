@@ -34,6 +34,7 @@ namespace EZKey
             sldrFOffset.Value = Manager.tOffsetY;
             tbBackground.Text = Manager.Background.ToString();
             tbForeground.Text = Manager.Foreground.ToString();
+            tbFGPressed.Text = Manager.ForegroundPressed.ToString();
             initialized = true;
         }
 
@@ -135,6 +136,19 @@ namespace EZKey
                 if (clr != null)
                 {
                     Manager.Foreground = (Color)clr;
+                    Manager.TriggerOptionChanged();
+                }
+            }
+        }
+
+        private void tbFGPressed_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (initialized)
+            {
+                Color? clr = ConvertColor(tbFGPressed.Text);
+                if (clr != null)
+                {
+                    Manager.ForegroundPressed = (Color)clr;
                     Manager.TriggerOptionChanged();
                 }
             }
