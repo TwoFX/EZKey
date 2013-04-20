@@ -47,7 +47,7 @@ namespace EZKey
             Manager.KeyUp += displayKeyUp;
             Manager.OptionChanged += setOptions;
 
-            Manager.Background = Colors.White;
+            Manager.Background = (Color)ColorConverter.ConvertFromString("#FFDDDDDD");
             Manager.Foreground = Colors.White;
             Manager.ForegroundPressed = Colors.Orange;
             Manager.Border = Colors.Black;
@@ -181,7 +181,6 @@ namespace EZKey
                     else if (i < 70) // F1 - F12
                     {
                         c.Height = c.Width = Manager.Size * 120.0;
-                        int ao = Convert.ToInt32(Math.Floor((i - 58) / 4.0)) * 2;
                         c.Margin = new Thickness(Manager.BasicOffsetY * 80.0 + (8 + i * 4 - 232 + Math.Floor((i - 58) / 4.0) * 2) * Manager.OffsetX * 36.0 * Manager.Size * 4, Manager.BasicOffsetY * 80.0, 0, 0);
                     }
                     else // Escape Key
@@ -200,6 +199,7 @@ namespace EZKey
             }
             this.grid.Width = keyLayout.Max(x => x == null ? 0 : x.Margin.Left + x.Width) + 25;
             this.grid.Height = keyLayout.Max(x => x == null ? 0 : x.Margin.Top + x.Height) + 25;
+            this.grid.Background = new SolidColorBrush(Manager.Background);
             lblOptions.Width = this.Width;
             Layout = Manager.Layout;
         }
