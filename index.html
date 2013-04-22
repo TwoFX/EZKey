@@ -4,30 +4,40 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>EZKey Keyboard Visualization by TwoFX</title>
-
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
   <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/TwoFX/EZKey">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/TwoFX/EZKey/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/TwoFX/EZKey/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
     <div class="wrapper">
-      <header>
-        <h1>EZKey Keyboard Visualization</h1>
-        <p>A C#.NET/WPF application for live streamers of real time strategy games to visualize their keyboard usage - Works with a single monitor and OBS</p>
 
-        <p class="view"><a href="https://github.com/TwoFX/EZKey">View the Project on GitHub <small>TwoFX/EZKey</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/TwoFX/EZKey/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/TwoFX/EZKey/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/TwoFX/EZKey">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
       <section>
+        <div id="title">
+          <h1>EZKey Keyboard Visualization</h1>
+          <p>A C#.NET/WPF application for live streamers of real time strategy games to visualize their keyboard usage - Works with a single monitor and OBS</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/TwoFX">TwoFX</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
+
         <h1>EZKey Keyboard Visualization</h1>
 
 <p><img src="http://i.imgur.com/2Kpmorb.png" alt="Example Stream Setup"><img src="http://i.imgur.com/oHMvy1M.png" alt="The software and the options menu"></p>
@@ -61,17 +71,15 @@ Thank you for providing feedback to fix the problems.</li>
 <li>Play around with the sliders until you find a configuration you like.</li>
 <li>The colors in the input fields can have the following formats (A=Alpha; R=Red; G=Green; B=Blue): #AARRGGBB or AARRGGBB or #RRGGBB or RRGGBB or #ARGB or ARGB or #RGB or RGB</li>
 <li>If you plan on chroma keying the background in order to put an image behind it later (see the first image above for an example), I'd reccommend choosing #FFFF0000 as background color.</li>
-<li>Software capture it using OBS. If you want to chroma key, you will get the best result with a similarity value around 60.</li>
+<li>Software capture it using OBS. If you want to chroma key, you will get the best result with a similarity value around 60. <a href="http://i.imgur.com/L2IqWeS.png">Click here for an example image</a>
+</li>
 <li>Don't attempt to minimize the software, just start StarCraft.</li>
 <li>If it doesn't work, please make sure to report you config as explained above. Thank you!</li>
 </ol>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/TwoFX">TwoFX</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
   </body>
 </html>
