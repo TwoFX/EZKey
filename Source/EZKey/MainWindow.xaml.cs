@@ -200,7 +200,7 @@ namespace EZKey
             this.grid.Width = keyLayout.Max(x => x == null ? 0 : x.Margin.Left + x.Width) + 25;
             this.grid.Height = keyLayout.Max(x => x == null ? 0 : x.Margin.Top + x.Height) + 25;
             this.grid.Background = new SolidColorBrush(Manager.Background);
-            lblOptions.Width = this.Width;
+            lblOptions.Width = this.grid.Width;
             Layout = Manager.Layout;
         }
 
