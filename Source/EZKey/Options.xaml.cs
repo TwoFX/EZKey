@@ -22,6 +22,8 @@ namespace EZKey
     {
 
         bool initialized = false;
+
+
         public Options()
         {
             InitializeComponent();
@@ -35,6 +37,8 @@ namespace EZKey
             tbBackground.Text = Manager.Background.ToString();
             tbForeground.Text = Manager.Foreground.ToString();
             tbFGPressed.Text = Manager.ForegroundPressed.ToString();
+            tbStrokeClr.Text = Manager.Border.ToString();
+            lblMaskKey.Content = Manager.Lables[Manager.Layout[Manager.lockKey]];
             initialized = true;
         }
 
@@ -152,6 +156,50 @@ namespace EZKey
                     Manager.TriggerOptionChanged();
                 }
             }
+        }
+
+        private void tbStrokeClr_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (initialized)
+            {
+                Color? clr = ConvertColor(tbStrokeClr.Text);
+                if (clr != null)
+                {
+                    Manager.Border = (Color)clr;
+                    Manager.TriggerOptionChanged();
+                }
+            }
+        }
+
+        private void cbMask_Checked(object sender, RoutedEventArgs e)
+        {
+            Manager.lockMaskEnabled = true;
+            tbMask.IsEnabled = true;
+        }
+
+        private void cbMask_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Manager.lockMaskEnabled = false;
+            tbMask.IsEnabled = false;
+        }
+
+        private void tbMask_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Manager.lockSymbol = tbMask.Text;
+        }
+
+        private void btnSetLockKey_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.KeyDown += setHotkey;
+            btnSetLockKey.Content = "Press a button";
+        }
+
+        private void setHotkey(int keyCode)
+        {
+            Manager.KeyDown -= setHotkey;
+            Manager.lockKey = keyCode;
+            lblMaskKey.Content = Manager.Lables[Manager.Layout[Manager.lockKey]];
+            btnSetLockKey.Content = "Set";
         }
     }
 }

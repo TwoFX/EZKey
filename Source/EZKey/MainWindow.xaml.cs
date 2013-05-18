@@ -29,6 +29,7 @@ namespace EZKey
         private Dictionary<int, int> Layout;
         private string[] lbls = Manager.Lables;
         private int keyDex = 71;
+        private bool lockMode = false;
 
         public MainWindow()
         {
@@ -54,6 +55,9 @@ namespace EZKey
             Manager.BorderPressed = Colors.Black;
             Manager.Text = Colors.Black;
             Manager.TextPressed = Colors.White;
+
+            Manager.lockKey = 0x78;
+            Manager.lockSymbol = "?";
 
             Manager.Size = 
                 Manager.Roundness = 
@@ -189,7 +193,7 @@ namespace EZKey
                         c.Margin = new Thickness(Manager.BasicOffsetX * 80.0, Manager.BasicOffsetY * 80.0, 0, 0);
                     }
                     Label l = lblLayout[i];
-                    l.Content = lbls[i];
+                    l.Content = lockMode && Manager.lockMaskEnabled ? Manager.lockSymbol : lbls[i];
                     l.Width = c.Width;
                     l.Height = c.Height;
                     l.FontSize = Manager.FontSize * 46.0;
@@ -206,14 +210,20 @@ namespace EZKey
 
         private void displayKeyDown(int KeyCode)
         {
-            if (Layout.Keys.Contains(KeyCode))
+            if (KeyCode == Manager.lockKey)
+            {
+                lockMode = !lockMode;
+                setOptions();
+            }
+            if (Layout.Keys.Contains(KeyCode) && !lockMode)
                 keyLayout[Layout[KeyCode]].Fill = new SolidColorBrush(Manager.ForegroundPressed);
         }
 
         private void displayKeyUp(int KeyCode)
         {
-            if (Layout.Keys.Contains(KeyCode))
+            if (Layout.Keys.Contains(KeyCode) && !lockMode)
                 keyLayout[Layout[KeyCode]].Fill = new SolidColorBrush(Manager.Foreground);
+
         }
 
         private void Window_MouseDown_1(object sender, MouseButtonEventArgs e)

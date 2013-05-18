@@ -15,6 +15,9 @@ namespace EZKey
         public static KeyHandler KeyUp, KeyDown;
         public static Color Background, Foreground, ForegroundPressed, Text, TextPressed, Border, BorderPressed;
         public static double BorderThickness, Roundness, Size, OffsetX, OffsetY, BasicOffsetX, BasicOffsetY, tOffsetY, FontSize; // Is Roundness a word? Whatever..
+        public static bool lockMaskEnabled;
+        public static int lockKey;
+        public static string lockSymbol;
         public static Dictionary<int, int> Layout = LanguagePacks.enUS;
         public static string[] Lables = LanguagePacks.enUSlbl;
 
