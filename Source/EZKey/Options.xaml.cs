@@ -42,6 +42,10 @@ namespace EZKey
             lblMaskKey.Content = Manager.Lables[Manager.Layout[Manager.lockKey]];
             tbFont.Text = Manager.Text.ToString();
             tbFontPressed.Text = Manager.TextPressed.ToString();
+            cbMask.IsChecked = Manager.lockMaskEnabled;
+            cbItalic.IsChecked = Manager.FontS == FontStyles.Italic;
+            cbBold.IsChecked = Manager.FontW == FontWeights.Bold;
+            tbFontFamily.Text = Manager.Font.ToString();
 
             btnStrokeKeyStroke.Background = new SolidColorBrush(Manager.BorderPressed);
             btnBackground.Background = new SolidColorBrush(Manager.Background);
@@ -335,6 +339,36 @@ namespace EZKey
             Manager.TextPressed = clr;
             btnFontPressed.Background = new SolidColorBrush(clr);
             tbFontPressed.Text = clr.ToString();
+        }
+
+        private void btnFontFamily_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.Font = new FontFamily(tbFontFamily.Text);
+            Manager.TriggerOptionChanged();
+        }
+
+        private void cbBold_Checked(object sender, RoutedEventArgs e)
+        {
+            Manager.FontW = FontWeights.Bold;
+            Manager.TriggerOptionChanged();
+        }
+
+        private void cbBold_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Manager.FontW = FontWeights.Normal;
+            Manager.TriggerOptionChanged();
+        }
+
+        private void cbItalic_Checked(object sender, RoutedEventArgs e)
+        {
+            Manager.FontS = FontStyles.Italic;
+            Manager.TriggerOptionChanged();
+        }
+
+        private void cbItalic_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Manager.FontS = FontStyles.Normal;
+            Manager.TriggerOptionChanged();
         }
     }
 }

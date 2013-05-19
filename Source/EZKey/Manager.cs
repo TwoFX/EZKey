@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Media;
+using System.Windows;
 using System.Threading.Tasks;
 
 namespace EZKey
@@ -20,6 +21,9 @@ namespace EZKey
         public static string lockSymbol;
         public static Dictionary<int, int> Layout = LanguagePacks.enUS;
         public static string[] Lables = LanguagePacks.enUSlbl;
+        public static FontFamily Font;
+        public static FontWeight FontW;
+        public static FontStyle FontS;
 
         public static void TriggerKeyDown(int KeyCode)
         {

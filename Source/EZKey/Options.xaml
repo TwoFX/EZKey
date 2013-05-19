@@ -1,7 +1,7 @@
 ﻿<Window x:Class="EZKey.Options"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Options" Height="548" Width="427">
+        Title="Options" Height="690" Width="427">
     <Grid>
         <Slider x:Name="sldrRoundness" HorizontalAlignment="Left" Margin="163,37,0,0" VerticalAlignment="Top" Width="246" Maximum="1" ValueChanged="Slider_ValueChanged_1" Value="0.25"/>
         <Label Content="Size:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -25,12 +25,12 @@
         <Label Content="Foreground on keystroke:" HorizontalAlignment="Left" Margin="10,252,0,0" VerticalAlignment="Top" Width="148"/>
         <Label Content="Stroke Color:" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbStrokeClr" HorizontalAlignment="Left" Height="23" Margin="163,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" TextChanged="tbStrokeClr_TextChanged"/>
-        <Label Content="Lock Hotkey:" HorizontalAlignment="Left" Margin="8,412,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblMaskKey" Content="" HorizontalAlignment="Left" Margin="173,413,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnSetLockKey" Content="Set" HorizontalAlignment="Left" Margin="267,416,0,0" VerticalAlignment="Top" Width="142" Click="btnSetLockKey_Click"/>
-        <CheckBox x:Name="cbMask" Content="Mask on Lock:" HorizontalAlignment="Left" Margin="10,447,0,0" VerticalAlignment="Top" Checked="cbMask_Checked" Unchecked="cbMask_Unchecked"/>
-        <TextBox x:Name="tbMask" HorizontalAlignment="Left" Height="23" Margin="173,444,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="246" IsEnabled="False" Text="?" TextChanged="tbMask_TextChanged"/>
-        <Label Content="Internal Alpha Build" HorizontalAlignment="Left" Margin="10,482,0,0" VerticalAlignment="Top"/>
+        <Label Content="Lock Hotkey:" HorizontalAlignment="Left" Margin="14,562,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblMaskKey" Content="" HorizontalAlignment="Left" Margin="163,562,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnSetLockKey" Content="Set" HorizontalAlignment="Left" Margin="267,566,0,0" VerticalAlignment="Top" Width="142" Click="btnSetLockKey_Click"/>
+        <CheckBox x:Name="cbMask" Content="Mask on Lock:" HorizontalAlignment="Left" Margin="10,596,0,0" VerticalAlignment="Top" Checked="cbMask_Checked" Unchecked="cbMask_Unchecked"/>
+        <TextBox x:Name="tbMask" HorizontalAlignment="Left" Height="23" Margin="163,593,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="246" IsEnabled="False" Text="?" TextChanged="tbMask_TextChanged"/>
+        <Label Content="Version 0.4 (Alpha)" HorizontalAlignment="Left" Margin="10,624,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnBackground" Content="" HorizontalAlignment="Left" Margin="384,199,0,0" VerticalAlignment="Top" Width="25" Click="btnBackground_Click" Focusable="False" Height="23"/>
         <Button x:Name="btnForeground" Content="" HorizontalAlignment="Left" Margin="384,227,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23" Click="btnForeground_Click"/>
         <Button x:Name="btnFgKs" Content="" HorizontalAlignment="Left" Margin="384,255,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23" Click="btnFgKs_Click"/>
@@ -44,5 +44,10 @@
         <TextBox x:Name="tbFontPressed" HorizontalAlignment="Left" Height="23" Margin="163,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" TextChanged="tbFontPressed_TextChanged"/>
         <Button x:Name="btnFontPressed" Content="" HorizontalAlignment="Left" Margin="384,367,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23" Click="btnFontPressed_Click"/>
         <Label Content="Font Color on keystroke:" HorizontalAlignment="Left" Margin="10,364,0,0" VerticalAlignment="Top"/>
+        <Label Content="Font:" HorizontalAlignment="Left" Margin="10,392,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbFontFamily" HorizontalAlignment="Left" Height="23" Margin="163,395,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
+        <Button x:Name="btnFontFamily" Content="Load" HorizontalAlignment="Left" Margin="315,395,0,0" VerticalAlignment="Top" Width="94" Height="23" Click="btnFontFamily_Click"/>
+        <CheckBox x:Name="cbBold" Content="Bold" HorizontalAlignment="Left" Margin="168,423,0,0" VerticalAlignment="Top" Checked="cbBold_Checked" Unchecked="cbBold_Unchecked"/>
+        <CheckBox x:Name="cbItalic" Content="Italic" HorizontalAlignment="Left" Margin="235,423,0,0" VerticalAlignment="Top" Checked="cbItalic_Checked" Unchecked="cbItalic_Unchecked"/>
     </Grid>
 </Window>

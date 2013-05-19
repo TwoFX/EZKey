@@ -59,6 +59,10 @@ namespace EZKey
             Manager.lockKey = 0x78;
             Manager.lockSymbol = "?";
 
+            Manager.Font = new FontFamily("Segoe UI");
+            Manager.FontW = FontWeights.Bold;
+            Manager.FontS = FontStyles.Normal;
+
             Manager.Size = 
                 Manager.Roundness = 
                 Manager.BorderThickness = 
@@ -196,6 +200,9 @@ namespace EZKey
                     l.Content = lockMode && Manager.lockMaskEnabled ? Manager.lockSymbol : lbls[i];
                     l.Width = c.Width;
                     l.Height = c.Height;
+                    l.FontFamily = Manager.Font;
+                    l.FontWeight = Manager.FontW;
+                    l.FontStyle = Manager.FontS;
                     l.FontSize = Manager.FontSize * 46.0;
                     l.Foreground = new SolidColorBrush(Manager.Text);
                     l.Margin = i == 48 ? new Thickness(0, c.Margin.Top, c.Margin.Right, 0) : new Thickness(c.Margin.Left, c.Margin.Top, 0, 0);
