@@ -4,7 +4,7 @@ EZKey Keyboard Visualization
 ![Example Stream Setup](http://i.imgur.com/2Kpmorb.png)
 _Example setup using chroma key_
 
-![The software and the options menu with color picker](http://imgur.com/TTSN4Xa)
+![The software and the options menu with color picker](http://i.imgur.com/TTSN4Xa.jpg)
 _The software and the options menu_
 
 **Issues have been reported that the program does not work while SC2 is maximized for some people. If you are experiencing this issue, PLEASE send the following information to twofxsc@gmail.com**
