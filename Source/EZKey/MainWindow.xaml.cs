@@ -54,7 +54,7 @@ namespace EZKey
             Manager.Border = Colors.Black;
             Manager.BorderPressed = Colors.Black;
             Manager.Text = Colors.Black;
-            Manager.TextPressed = Colors.White;
+            Manager.TextPressed = Colors.Black;
 
             Manager.lockKey = 0x78;
             Manager.lockSymbol = "?";
@@ -197,6 +197,7 @@ namespace EZKey
                     l.Width = c.Width;
                     l.Height = c.Height;
                     l.FontSize = Manager.FontSize * 46.0;
+                    l.Foreground = new SolidColorBrush(Manager.Text);
                     l.Margin = i == 48 ? new Thickness(0, c.Margin.Top, c.Margin.Right, 0) : new Thickness(c.Margin.Left, c.Margin.Top, 0, 0);
                 }
                 
@@ -216,13 +217,21 @@ namespace EZKey
                 setOptions();
             }
             else if (Layout.Keys.Contains(KeyCode) && !lockMode)
+            {
+                lblLayout[Layout[KeyCode]].Foreground = new SolidColorBrush(Manager.TextPressed);
                 keyLayout[Layout[KeyCode]].Fill = new SolidColorBrush(Manager.ForegroundPressed);
+                keyLayout[Layout[KeyCode]].Stroke = new SolidColorBrush(Manager.BorderPressed);
+            }
         }
 
         private void displayKeyUp(int KeyCode)
         {
             if (Layout.Keys.Contains(KeyCode) && !lockMode)
+            {
+                lblLayout[Layout[KeyCode]].Foreground = new SolidColorBrush(Manager.Text);
                 keyLayout[Layout[KeyCode]].Fill = new SolidColorBrush(Manager.Foreground);
+                keyLayout[Layout[KeyCode]].Stroke = new SolidColorBrush(Manager.Border);
+            }
 
         }
 
@@ -262,9 +271,6 @@ namespace EZKey
             if (e.ChangedButton == MouseButton.Left)
             {
                 Microsoft.Win32.SaveFileDialog sfg = new Microsoft.Win32.SaveFileDialog();
-                //System.Windows.Forms.ColorDialog cd = new System.Windows.Forms.ColorDialog();
-                //cd.Color = System.Drawing.Color.FromArgb(Manager.Background.A, Manager.Background.R, Manager.Background.G, Manager.Background.B);
-                //cd.ShowDialog();
             }
         }
     }
