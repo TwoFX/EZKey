@@ -39,7 +39,23 @@ namespace EZKey
             tbFGPressed.Text = Manager.ForegroundPressed.ToString();
             tbStrokeClr.Text = Manager.Border.ToString();
             lblMaskKey.Content = Manager.Lables[Manager.Layout[Manager.lockKey]];
+
+            btnBackground.Background = new SolidColorBrush(Manager.Background);
+            btnForeground.Background = new SolidColorBrush(Manager.Foreground);
+            btnFgKs.Background = new SolidColorBrush(Manager.ForegroundPressed);
+            btnStroke.Background = new SolidColorBrush(Manager.Border);
+
             initialized = true;
+        }
+
+        private System.Windows.Media.Color DToM(System.Drawing.Color input)
+        {
+            return System.Windows.Media.Color.FromArgb(input.A, input.R, input.G, input.B);
+        }
+
+        private System.Drawing.Color MToD(System.Windows.Media.Color input)
+        {
+            return System.Drawing.Color.FromArgb(input.A, input.R, input.G, input.B);
         }
 
         private void Slider_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -113,6 +129,7 @@ namespace EZKey
                 if (clr != null)
                 {
                     Manager.Background = (Color)clr;
+                    btnBackground.Background = new SolidColorBrush((Color)clr);
                     Manager.TriggerOptionChanged();
                 }
             }
@@ -140,6 +157,7 @@ namespace EZKey
                 if (clr != null)
                 {
                     Manager.Foreground = (Color)clr;
+                    btnForeground.Background = new SolidColorBrush((Color)clr);
                     Manager.TriggerOptionChanged();
                 }
             }
@@ -153,6 +171,7 @@ namespace EZKey
                 if (clr != null)
                 {
                     Manager.ForegroundPressed = (Color)clr;
+                    btnFgKs.Background = new SolidColorBrush((Color)clr);
                     Manager.TriggerOptionChanged();
                 }
             }
@@ -166,6 +185,7 @@ namespace EZKey
                 if (clr != null)
                 {
                     Manager.Border = (Color)clr;
+                    btnStroke.Background = new SolidColorBrush((Color)clr);
                     Manager.TriggerOptionChanged();
                 }
             }
@@ -200,6 +220,58 @@ namespace EZKey
             Manager.lockKey = keyCode;
             lblMaskKey.Content = Manager.Lables[Manager.Layout[Manager.lockKey]];
             btnSetLockKey.Content = "Set";
+        }
+
+        private void btnBackground_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog cd = new System.Windows.Forms.ColorDialog();
+            cd.Color = MToD(Manager.Background);
+            cd.SolidColorOnly = true;
+            if (cd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Manager.Background = DToM(cd.Color);
+                btnBackground.Background = new SolidColorBrush(DToM(cd.Color));
+                tbBackground.Text = DToM(cd.Color).ToString();
+            }
+        }
+
+        private void btnForeground_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog cd = new System.Windows.Forms.ColorDialog();
+            cd.Color = MToD(Manager.Foreground);
+            cd.SolidColorOnly = true;
+            if (cd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Manager.Foreground = DToM(cd.Color);
+                btnBackground.Foreground = new SolidColorBrush(DToM(cd.Color));
+                tbForeground.Text = DToM(cd.Color).ToString();
+            }
+        }
+
+        private void btnFgKs_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog cd = new System.Windows.Forms.ColorDialog();
+            cd.Color = MToD(Manager.ForegroundPressed);
+            cd.SolidColorOnly = true;
+            if (cd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Manager.ForegroundPressed = DToM(cd.Color);
+                btnFgKs.Foreground = new SolidColorBrush(DToM(cd.Color));
+                tbFGPressed.Text = DToM(cd.Color).ToString();
+            }
+        }
+
+        private void btnStroke_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog cd = new System.Windows.Forms.ColorDialog();
+            cd.Color = MToD(Manager.Border);
+            cd.SolidColorOnly = true;
+            if (cd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Manager.Border = DToM(cd.Color);
+                btnStroke.Foreground = new SolidColorBrush(DToM(cd.Color));
+                tbStrokeClr.Text = DToM(cd.Color).ToString();
+            }
         }
     }
 }

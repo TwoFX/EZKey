@@ -1,8 +1,11 @@
 ﻿<Window x:Class="EZKey.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="EZKey Keyboard Visualization" Height="0" Width="0" FontWeight="Bold" Loaded="Window_Loaded_1" Background="#FFFFFFFF" MouseDown="Window_MouseDown_1" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+        Title="EZKey Keyboard Visualization" Height="278" Width="489" FontWeight="Bold" Loaded="Window_Loaded_1" Background="#FFFFFFFF" MouseDown="Window_MouseDown_1" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
     <Grid x:Name="grid" Background="#FFDDDDDD" MouseEnter="grid_MouseEnter" MouseLeave="grid_MouseLeave">
         <Label x:Name="lblOptions" Content="Options" HorizontalAlignment="Right" VerticalAlignment="Top" Height="17" FontWeight="Normal" Padding="0" MouseDown="lblClose_MouseDown" Visibility="Hidden" Margin="0,3,0,0" Grid.Column="1" HorizontalContentAlignment="Center"/>
+        <Label x:Name="lblEdit" Content="Edit Layout" HorizontalAlignment="Left" FontWeight="Normal" Visibility="Hidden" MouseDown="lblLayout_MouseDown"/>
+        <Label x:Name="lblLoad" Content="Load" HorizontalAlignment="Left" Margin="0,224,0,0" VerticalAlignment="Bottom" FontWeight="Normal" MouseDown="lblLoad_MouseDown" Visibility="Hidden"/>
+        <Label x:Name="lblSave" Content="Save" HorizontalAlignment="Left" Margin="41,0,0,0" VerticalAlignment="Bottom" FontWeight="Normal" MouseDown="lblSave_MouseDown" Visibility="Hidden"/>
     </Grid>
 </Window>

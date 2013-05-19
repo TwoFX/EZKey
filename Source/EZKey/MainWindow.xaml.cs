@@ -215,7 +215,7 @@ namespace EZKey
                 lockMode = !lockMode;
                 setOptions();
             }
-            if (Layout.Keys.Contains(KeyCode) && !lockMode)
+            else if (Layout.Keys.Contains(KeyCode) && !lockMode)
                 keyLayout[Layout[KeyCode]].Fill = new SolidColorBrush(Manager.ForegroundPressed);
         }
 
@@ -228,9 +228,7 @@ namespace EZKey
 
         private void Window_MouseDown_1(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
-            else if (e.ChangedButton == MouseButton.Middle)
+            if (e.ChangedButton == MouseButton.Middle)
                 new Options().Show();
         }
 
@@ -247,6 +245,27 @@ namespace EZKey
         private void lblClose_MouseDown(object sender, MouseButtonEventArgs e)
         {
             new Options().Show();
+        }
+
+        private void lblLayout_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void lblLoad_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+
+        private void lblSave_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                Microsoft.Win32.SaveFileDialog sfg = new Microsoft.Win32.SaveFileDialog();
+                //System.Windows.Forms.ColorDialog cd = new System.Windows.Forms.ColorDialog();
+                //cd.Color = System.Drawing.Color.FromArgb(Manager.Background.A, Manager.Background.R, Manager.Background.G, Manager.Background.B);
+                //cd.ShowDialog();
+            }
         }
     }
 }
