@@ -2,9 +2,9 @@ EZKey Keyboard Visualization
 ============================
 
 ![Example Stream Setup](http://i.imgur.com/2Kpmorb.png)
-_Example setup using color key_
+_Example setup using chroma key_
 
-![The software and the options menu](http://i.imgur.com/oHMvy1M.png)
+![The software and the options menu with color picker](http://i.imgur.com/Xan4z8u.jpg)
 _The software and the options menu_
 
 **Issues have been reported that the program does not work while SC2 is maximized for some people. If you are experiencing this issue, PLEASE send the following information to twofxsc@gmail.com**
