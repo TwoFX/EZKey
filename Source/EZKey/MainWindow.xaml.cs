@@ -48,31 +48,7 @@ namespace EZKey
             Manager.KeyUp += displayKeyUp;
             Manager.OptionChanged += setOptions;
 
-            Manager.Background = (Color)ColorConverter.ConvertFromString("#FFDDDDDD");
-            Manager.Foreground = Colors.White;
-            Manager.ForegroundPressed = Colors.Orange;
-            Manager.Border = Colors.Black;
-            Manager.BorderPressed = Colors.Black;
-            Manager.Text = Colors.Black;
-            Manager.TextPressed = Colors.Black;
-
-            Manager.lockKey = 0x78;
-            Manager.lockSymbol = "?";
-
-            Manager.Font = new FontFamily("Segoe UI");
-            Manager.FontW = FontWeights.Bold;
-            Manager.FontS = FontStyles.Normal;
-
-            Manager.Size = 
-                Manager.Roundness = 
-                Manager.BorderThickness = 
-                Manager.BasicOffsetX = 
-                Manager.OffsetX = 
-                Manager.BasicOffsetY = 
-                Manager.OffsetY = 
-                Manager.tOffsetY =
-                Manager.FontSize =
-                0.25; 
+            Manager.LoadStandarts();
 
             for (int i = 0; i < keyDex; i++)
             {

@@ -370,5 +370,52 @@ namespace EZKey
             Manager.FontS = FontStyles.Normal;
             Manager.TriggerOptionChanged();
         }
+
+        private void btnLoadConf_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
+            ofd.Filter = "EZKey Config Files|*.ezc|All Files|*.*";
+            if (ofd.ShowDialog() == true)
+            {
+                IEnumerable<string[]> loaded = System.IO.File.ReadAllLines(ofd.FileName).Select<string, string[]>(x => x.Trim('"')
+                    .Split(new string[] { "\" \"" }, StringSplitOptions.RemoveEmptyEntries)).ToArray();
+                Manager.ApplyConfig(loaded);
+            }
+            new Options().Show();
+            this.Close();
+        }
+
+        private void btnSaveConf_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.SaveFileDialog sfd = new Microsoft.Win32.SaveFileDialog();
+            sfd.Filter = "EZKey Config Files|*.ezc|All Files|*.*";
+            if (sfd.ShowDialog() == true)
+            {
+                System.IO.StreamWriter sw = new System.IO.StreamWriter(sfd.FileName);
+                foreach (System.Reflection.FieldInfo field in typeof(Manager).GetFields())
+                {
+                    string l = "\"" + field.Name + "\" \"";
+                    if (field.FieldType == typeof(string) ||
+                        field.FieldType == typeof(Color) ||
+                        field.FieldType == typeof(FontFamily) ||
+                        field.FieldType == typeof(int))
+                        l += field.GetValue(null).ToString();
+                    else if (field.FieldType == typeof(bool))
+                        l += (bool)field.GetValue(null) ? "#t" : "#f";
+                    else if (field.FieldType == typeof(FontWeight))
+                        l += (FontWeight)field.GetValue(null) == FontWeights.Bold ? "#t" : "#f";
+                    else if (field.FieldType == typeof(FontStyle))
+                        l += (FontStyle)field.GetValue(null) == FontStyles.Italic ? "#t" : "#f";
+                    else if (field.FieldType == typeof(double))
+                    {
+                        double m = (double)field.GetValue(null);
+                        l += m.ToString(new System.Globalization.CultureInfo("en-US"));
+                    }
+                    if (l.Last() != '"')
+                        sw.WriteLine(l + "\"");
+                }
+                sw.Close();
+            }
+        }
     }
 }
