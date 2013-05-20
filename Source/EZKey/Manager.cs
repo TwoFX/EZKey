@@ -26,7 +26,7 @@ namespace EZKey
         public static FontWeight FontW;
         public static FontStyle FontS;
 
-        public static void LoadStandarts()
+        public static void LoadStandards()
         {
             Manager.Background = (Color)ColorConverter.ConvertFromString("#FFDDDDDD");
             Manager.Foreground = Colors.White;
@@ -57,7 +57,7 @@ namespace EZKey
 
         public static void ApplyConfig(IEnumerable<string[]> values)
         {
-            LoadStandarts();
+            LoadStandards();
             foreach (string[] fieldS in values)
             {
                 FieldInfo field = typeof(Manager).GetField(fieldS[0]);

@@ -48,7 +48,7 @@ namespace EZKey
             Manager.KeyUp += displayKeyUp;
             Manager.OptionChanged += setOptions;
 
-            Manager.LoadStandarts();
+            Manager.LoadStandards();
 
             for (int i = 0; i < keyDex; i++)
             {
@@ -255,6 +255,11 @@ namespace EZKey
             {
                 Microsoft.Win32.SaveFileDialog sfg = new Microsoft.Win32.SaveFileDialog();
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

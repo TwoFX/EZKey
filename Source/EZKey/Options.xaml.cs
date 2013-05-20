@@ -377,9 +377,10 @@ namespace EZKey
             ofd.Filter = "EZKey Config Files|*.ezc|All Files|*.*";
             if (ofd.ShowDialog() == true)
             {
-                IEnumerable<string[]> loaded = System.IO.File.ReadAllLines(ofd.FileName).Select<string, string[]>(x => x.Trim('"')
-                    .Split(new string[] { "\" \"" }, StringSplitOptions.RemoveEmptyEntries)).ToArray();
-                Manager.ApplyConfig(loaded);
+                Manager.ApplyConfig(
+                    System.IO.File.ReadAllLines(ofd.FileName)
+                    .Select<string, string[]>(x => x
+                    .Split(new char[] { ' ' }, 2, StringSplitOptions.RemoveEmptyEntries)));
             }
             new Options().Show();
             this.Close();
@@ -394,7 +395,7 @@ namespace EZKey
                 System.IO.StreamWriter sw = new System.IO.StreamWriter(sfd.FileName);
                 foreach (System.Reflection.FieldInfo field in typeof(Manager).GetFields())
                 {
-                    string l = "\"" + field.Name + "\" \"";
+                    string l = field.Name + " ";
                     if (field.FieldType == typeof(string) ||
                         field.FieldType == typeof(Color) ||
                         field.FieldType == typeof(FontFamily) ||
@@ -411,11 +412,18 @@ namespace EZKey
                         double m = (double)field.GetValue(null);
                         l += m.ToString(new System.Globalization.CultureInfo("en-US"));
                     }
-                    if (l.Last() != '"')
-                        sw.WriteLine(l + "\"");
+                    if (l.Last() != ' ')
+                        sw.WriteLine(l);
                 }
                 sw.Close();
             }
+        }
+
+        private void btnRestoreSettings_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.LoadStandards();
+            new Options().Show();
+            this.Close();
         }
     }
 }

@@ -1,0 +1,22 @@
+Background #FFFFFFFF
+Foreground #FFFFFFFF
+ForegroundPressed #FFB90000
+Text #FF000000
+TextPressed #FFFFFFFF
+Border #FFB90000
+BorderPressed #FFB90000
+BorderThickness 0.364893617021277
+Roundness 0.25
+Size 0.47595744680851
+OffsetX 0.25
+OffsetY 0.25
+BasicOffsetX 0.25
+BasicOffsetY 0.25
+tOffsetY 0.25
+FontSize 0.433829787234042
+lockMaskEnabled #t
+lockKey 120
+lockSymbol ?
+Font Segoe UI
+FontW #t
+FontS #f
