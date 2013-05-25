@@ -56,14 +56,12 @@ namespace EZKey
                 {
                     Rectangle c = new Rectangle(); // I shall call it "The conveniance variable" (because keyLayout[i] is way too fucking long) ... Totally abusing reference types :D
                     keyLayout[i] = c;
-                    //c.HorizontalAlignment = i == 48 ? HorizontalAlignment.Right : HorizontalAlignment.Left;
                     c.HorizontalAlignment = HorizontalAlignment.Left;
                     c.VerticalAlignment = VerticalAlignment.Top;
                     grid.Children.Add(c);
                     Label l = new Label();
                     lblLayout[i] = l;
                     l.FontSize = Manager.FontSize * 46.0;
-                    //l.HorizontalAlignment = i == 48 ? HorizontalAlignment.Right : HorizontalAlignment.Left;
                     l.HorizontalAlignment = HorizontalAlignment.Left;
                     l.VerticalAlignment = VerticalAlignment.Top;
                     l.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
@@ -115,7 +113,8 @@ namespace EZKey
                             case 48: // Backspace Key
                                 c.Height = Manager.Size * 120.0;
                                 c.Width = Manager.Size * 120 + Manager.OffsetX * 36.0 * 4 * Manager.Size * 4;
-                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i + 4) * Manager.OffsetX * 36.0 * Manager.Size * 4, Manager.BasicOffsetY * 80.0 + Manager.OffsetY * 20.0 * Manager.Size * 4 + Manager.Size * 120 + Manager.tOffsetY * 25 * Manager.Size * 4, 0, 0);                                break;
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i + 4) * Manager.OffsetX * 36.0 * Manager.Size * 4, Manager.BasicOffsetY * 80.0 + Manager.OffsetY * 20.0 * Manager.Size * 4 + Manager.Size * 120 + Manager.tOffsetY * 25 * Manager.Size * 4, 0, 0);
+                                break;
                             case 49: // Tab Key
                                 c.Height = Manager.Size * 120.0;
                                 c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 2 * Manager.Size * 4;
@@ -184,7 +183,6 @@ namespace EZKey
                     l.Foreground = new SolidColorBrush(Manager.Text);
                     l.Margin = new Thickness(c.Margin.Left, c.Margin.Top, 0, 0);
                 }
-                
             }
             this.grid.Width = keyLayout.Max(x => x == null ? 0 : x.Margin.Left + x.Width) + 25;
             this.grid.Height = keyLayout.Max(x => x == null ? 0 : x.Margin.Top + x.Height) + 25;
