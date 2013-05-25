@@ -28,7 +28,7 @@ namespace EZKey
         private Label[] lblLayout;
         private Dictionary<int, int> Layout;
         private string[] lbls = Manager.Lables;
-        private int keyDex = 71;
+        private int keyDex = 71; // Highest index of keys
         private bool lockMode = false;
 
         public MainWindow()
@@ -56,13 +56,15 @@ namespace EZKey
                 {
                     Rectangle c = new Rectangle(); // I shall call it "The conveniance variable" (because keyLayout[i] is way too fucking long) ... Totally abusing reference types :D
                     keyLayout[i] = c;
-                    c.HorizontalAlignment = i == 48 ? HorizontalAlignment.Right : HorizontalAlignment.Left;
+                    //c.HorizontalAlignment = i == 48 ? HorizontalAlignment.Right : HorizontalAlignment.Left;
+                    c.HorizontalAlignment = HorizontalAlignment.Left;
                     c.VerticalAlignment = VerticalAlignment.Top;
                     grid.Children.Add(c);
                     Label l = new Label();
                     lblLayout[i] = l;
                     l.FontSize = Manager.FontSize * 46.0;
-                    l.HorizontalAlignment = i == 48 ? HorizontalAlignment.Right : HorizontalAlignment.Left;
+                    //l.HorizontalAlignment = i == 48 ? HorizontalAlignment.Right : HorizontalAlignment.Left;
+                    l.HorizontalAlignment = HorizontalAlignment.Left;
                     l.VerticalAlignment = VerticalAlignment.Top;
                     l.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
                     l.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
@@ -112,9 +114,8 @@ namespace EZKey
                                 break;
                             case 48: // Backspace Key
                                 c.Height = Manager.Size * 120.0;
-                                c.Width = Manager.Size * 120.0 * 2 + Manager.OffsetX * 36.0 * Manager.Size * 4 - 3;
-                                c.Margin = new Thickness(0, Manager.BasicOffsetY * 80.0 + Manager.OffsetY * 20.0 * Manager.Size * 4 + Manager.Size * 120 + Manager.tOffsetY * 25 * Manager.Size * 4 , 25, 0);
-                                break;
+                                c.Width = Manager.Size * 120 + Manager.OffsetX * 36.0 * 4 * Manager.Size * 4;
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + (i + 4) * Manager.OffsetX * 36.0 * Manager.Size * 4, Manager.BasicOffsetY * 80.0 + Manager.OffsetY * 20.0 * Manager.Size * 4 + Manager.Size * 120 + Manager.tOffsetY * 25 * Manager.Size * 4, 0, 0);                                break;
                             case 49: // Tab Key
                                 c.Height = Manager.Size * 120.0;
                                 c.Width = Manager.Size * 120.0 + Manager.OffsetX * 36.0 * 2 * Manager.Size * 4;
@@ -181,7 +182,7 @@ namespace EZKey
                     l.FontStyle = Manager.FontS;
                     l.FontSize = Manager.FontSize * 46.0;
                     l.Foreground = new SolidColorBrush(Manager.Text);
-                    l.Margin = i == 48 ? new Thickness(0, c.Margin.Top, c.Margin.Right, 0) : new Thickness(c.Margin.Left, c.Margin.Top, 0, 0);
+                    l.Margin = new Thickness(c.Margin.Left, c.Margin.Top, 0, 0);
                 }
                 
             }

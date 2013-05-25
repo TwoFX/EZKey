@@ -5,7 +5,7 @@ Text #FF00DC9D
 TextPressed #FFFFFFFF
 Border #FF000000
 BorderPressed #FF000000
-BorderThickness 0.10531914893617
+BorderThickness 0
 Roundness 0
 Size 0.509787234042553
 OffsetX 0.224468085106383
