@@ -260,6 +260,7 @@ namespace EZKey
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            InterceptKeys.UnLoad();
             Application.Current.Shutdown();
         }
     }
