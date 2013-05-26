@@ -1,4 +1,22 @@
-﻿<Window x:Class="EZKey.MainWindow"
+﻿<!--
+ * Copyright (C) 2013 Markus Himmel
+ * 
+ * This file is part of EZKey Keyboard Visualization.
+ * 
+ * EZKey is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * EZKey is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see<http://www.gnu.org/licenses/> .
+ -->
+<Window x:Class="EZKey.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="EZKey Keyboard Visualization" Height="278" Width="489" FontWeight="Bold" Loaded="Window_Loaded_1" Background="#FFFFFFFF" MouseDown="Window_MouseDown_1" SizeToContent="WidthAndHeight" ResizeMode="NoResize" Closed="Window_Closed">

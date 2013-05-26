@@ -49,5 +49,8 @@ This page is also work in progress, btw. I will put a detailed explaination abou
 
 ***
 
+Contact me at:
+twofxsc@gmail.com
+
 
 The file EZKey/EZKey/InterceptKey.cs is mainly taken from Stephen Toub (http://blogs.msdn.com/b/toub/archive/2006/05/03/589423.aspx). Credit to him.
