@@ -431,8 +431,8 @@ namespace EZKey
                         double m = (double)field.GetValue(null);
                         l += m.ToString(new System.Globalization.CultureInfo("en-US"));
                     }
-                    if (l.Last() != ' ')
-                        sw.WriteLine(l);
+                    else continue;
+                    sw.WriteLine(l);
                 }
                 sw.Close();
             }
