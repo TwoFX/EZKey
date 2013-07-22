@@ -1,10 +1,10 @@
 EZKey Keyboard Visualization
 ============================
 
-![Example Stream Setup](http://i.imgur.com/2Kpmorb.png)
+![Example Stream Setup](http://i.imgur.com/2Kpmorb.png)<br>
 _Example setup using chroma key_
 
-![The software and the options menu with color picker](http://i.imgur.com/JAIobgP.jpg)
+![The software and the options menu with color picker](http://i.imgur.com/JAIobgP.jpg)<br>
 _The software and the options menu with color picker_
 
 **Issues have been reported that the program does not work while SC2 is maximized for some people. If you are experiencing this issue, PLEASE send the following information to twofxsc@gmail.com**
@@ -35,7 +35,8 @@ This is currently about as alpha as it gets. There are lots of awesome features 
 This page is also work in progress, btw. I will put a detailed explaination about how to set it up and usde it here once I'm actually done coding it.
 
 ### Upcoming versions
-Features I am currently working on and in which versions they will be released
+Features I am currently working on and in which versions they will be released.
+Current version: **0.5.2** ([View changelog](https://github.com/TwoFX/EZKey/blob/master/CHANGELOG.md))
 
 * **0.5.3** Text that gets bigger than the key gets dynamically scaled down (This has been an issue especially with the backpace key)
 * **0.6.0** An interactive edit mode that lets the user create and modify keyboard layouts and labels
