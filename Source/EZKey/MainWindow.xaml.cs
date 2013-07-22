@@ -245,6 +245,9 @@ namespace EZKey
 
         private void grid_MouseEnter(object sender, MouseEventArgs e)
         {
+            lblOptions.Foreground = new SolidColorBrush(Color.FromRgb((byte)(byte.MaxValue - Manager.Background.R),
+                (byte)(byte.MaxValue - Manager.Background.G),
+                (byte)(byte.MaxValue - Manager.Background.B)));
             lblOptions.Visibility = Visibility.Visible;
         }
 
