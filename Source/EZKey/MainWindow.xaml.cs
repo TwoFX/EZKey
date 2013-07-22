@@ -67,6 +67,7 @@ namespace EZKey
             Manager.KeyUp += displayKeyUp;
             Manager.OptionChanged += setOptions;
 
+            Manager.InitStandards();
             Manager.LoadStandards();
 
             for (int i = 0; i < keyDex; i++)

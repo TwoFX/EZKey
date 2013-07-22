@@ -414,25 +414,29 @@ namespace EZKey
                 System.IO.StreamWriter sw = new System.IO.StreamWriter(sfd.FileName);
                 foreach (System.Reflection.FieldInfo field in typeof(Manager).GetFields())
                 {
-                    string l = field.Name + " ";
-                    if (field.FieldType == typeof(string) ||
-                        field.FieldType == typeof(Color) ||
-                        field.FieldType == typeof(FontFamily) ||
-                        field.FieldType == typeof(int))
-                        l += field.GetValue(null).ToString();
-                    else if (field.FieldType == typeof(bool))
-                        l += (bool)field.GetValue(null) ? "#t" : "#f";
-                    else if (field.FieldType == typeof(FontWeight))
-                        l += (FontWeight)field.GetValue(null) == FontWeights.Bold ? "#t" : "#f";
-                    else if (field.FieldType == typeof(FontStyle))
-                        l += (FontStyle)field.GetValue(null) == FontStyles.Italic ? "#t" : "#f";
-                    else if (field.FieldType == typeof(double))
+                    if (typeof(Manager).GetFields().Any(x => x.Name == "d" + field.Name) &&
+                        !(typeof(Manager).GetField("d" + field.Name).GetValue(null).Equals(field.GetValue(null))))
                     {
-                        double m = (double)field.GetValue(null);
-                        l += m.ToString(new System.Globalization.CultureInfo("en-US"));
+                        string l = field.Name + " ";
+                        if (field.FieldType == typeof(string) ||
+                            field.FieldType == typeof(Color) ||
+                            field.FieldType == typeof(FontFamily) ||
+                            field.FieldType == typeof(int))
+                            l += field.GetValue(null).ToString();
+                        else if (field.FieldType == typeof(bool))
+                            l += (bool)field.GetValue(null) ? "#t" : "#f";
+                        else if (field.FieldType == typeof(FontWeight))
+                            l += (FontWeight)field.GetValue(null) == FontWeights.Bold ? "#t" : "#f";
+                        else if (field.FieldType == typeof(FontStyle))
+                            l += (FontStyle)field.GetValue(null) == FontStyles.Italic ? "#t" : "#f";
+                        else if (field.FieldType == typeof(double))
+                        {
+                            double m = (double)field.GetValue(null);
+                            l += m.ToString(new System.Globalization.CultureInfo("en-US"));
+                        }
+                        else continue; // Should never be the case anymore
+                        sw.WriteLine(l);
                     }
-                    else continue;
-                    sw.WriteLine(l);
                 }
                 sw.Close();
             }

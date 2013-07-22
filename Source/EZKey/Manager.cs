@@ -45,33 +45,58 @@ namespace EZKey
         public static FontWeight FontW;
         public static FontStyle FontS;
 
+        public static Color dBackground, dForeground, dForegroundPressed, dText, dTextPressed, dBorder, dBorderPressed;
+        public static double dBorderThickness, dRoundness, dSize, dOffsetX, dOffsetY, dBasicOffsetX, dBasicOffsetY, dtOffsetY, dFontSize; // Is Roundness a word? Whatever..
+        public static bool dlockMaskEnabled;
+        public static int dlockKey;
+        public static string dlockSymbol;
+        public static Dictionary<int, int> dLayout = LanguagePacks.enUS;
+        public static string[] dLables = LanguagePacks.enUSlbl;
+        public static FontFamily dFont;
+        public static FontWeight dFontW;
+        public static FontStyle dFontS;
+
+
+
+        public static void InitStandards()
+        {
+            Manager.dBackground = (Color)ColorConverter.ConvertFromString("#FFDDDDDD");
+            Manager.dForeground = Colors.White;
+            Manager.dForegroundPressed = Colors.Orange;
+            Manager.dBorder = Colors.Black;
+            Manager.dBorderPressed = Colors.Black;
+            Manager.dText = Colors.Black;
+            Manager.dTextPressed = Colors.Black;
+
+            Manager.dlockMaskEnabled = false;
+            Manager.dlockKey = 0x78;
+            Manager.dlockSymbol = "?";
+
+            Manager.dFont = new FontFamily("Segoe UI");
+            Manager.dFontW = FontWeights.Bold;
+            Manager.dFontS = FontStyles.Normal;
+
+            Manager.dSize =
+                Manager.dRoundness =
+                Manager.dBorderThickness =
+                Manager.dBasicOffsetX =
+                Manager.dOffsetX =
+                Manager.dBasicOffsetY =
+                Manager.dOffsetY =
+                Manager.dtOffsetY =
+                Manager.dFontSize =
+                0.25; 
+        }
+
         public static void LoadStandards()
         {
-            Manager.Background = (Color)ColorConverter.ConvertFromString("#FFDDDDDD");
-            Manager.Foreground = Colors.White;
-            Manager.ForegroundPressed = Colors.Orange;
-            Manager.Border = Colors.Black;
-            Manager.BorderPressed = Colors.Black;
-            Manager.Text = Colors.Black;
-            Manager.TextPressed = Colors.Black;
-
-            Manager.lockKey = 0x78;
-            Manager.lockSymbol = "?";
-
-            Manager.Font = new FontFamily("Segoe UI");
-            Manager.FontW = FontWeights.Bold;
-            Manager.FontS = FontStyles.Normal;
-
-            Manager.Size =
-                Manager.Roundness =
-                Manager.BorderThickness =
-                Manager.BasicOffsetX =
-                Manager.OffsetX =
-                Manager.BasicOffsetY =
-                Manager.OffsetY =
-                Manager.tOffsetY =
-                Manager.FontSize =
-                0.25; 
+            foreach (FieldInfo field in typeof(Manager).GetFields())
+            {
+                if (typeof(Manager).GetFields().Any(x => x.Name == "d" + field.Name))
+                {
+                    field.SetValue(null, typeof(Manager).GetField("d" + field.Name).GetValue(null));
+                }
+            }
         }
 
         public static void ApplyConfig(IEnumerable<string[]> values)
