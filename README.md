@@ -34,6 +34,12 @@ This is currently about as alpha as it gets. There are lots of awesome features 
 
 This page is also work in progress, btw. I will put a detailed explaination about how to set it up and usde it here once I'm actually done coding it.
 
+### Upcoming versions
+Features I am currently working on and in which versions they will be released
+
+* **0.5.3** Text that gets bigger than the key gets dynamically scaled down (This has been an issue especially with the backpace key)
+* **0.6.0** An interactive edit mode that lets the user create and modify keyboard layouts and labels
+
 ### Setup guide for streamers
 1. Download the ZIP file on the left.
 2. Extract the ZIP.
