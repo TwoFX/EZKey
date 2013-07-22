@@ -30,10 +30,12 @@ namespace EZKey
 {
     static class Manager
     {
+        public static MainWindow master;
         public delegate void KeyHandler(int KeyCode);
         public delegate void OptionChangedHandler();
         public static OptionChangedHandler OptionChanged;
         public static KeyHandler KeyUp, KeyDown;
+
         public static Color Background, Foreground, ForegroundPressed, Text, TextPressed, Border, BorderPressed;
         public static double BorderThickness, Roundness, Size, OffsetX, OffsetY, BasicOffsetX, BasicOffsetY, tOffsetY, FontSize; // Is Roundness a word? Whatever..
         public static bool lockMaskEnabled;

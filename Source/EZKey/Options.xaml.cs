@@ -448,5 +448,10 @@ namespace EZKey
             new Options().Show();
             this.Close();
         }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.master.EnableEditMode();
+        }
     }
 }
