@@ -47,6 +47,20 @@ namespace EZKey
 
         public Options()
         {
+            commonInit();
+            initialized = true;
+        }
+
+        public Options(double left, double top)
+        {
+            commonInit();
+            this.Left = left;
+            this.Top = top;
+            initialized = true;
+        }
+
+        private void commonInit()
+        {
             InitializeComponent();
 
             // Set Sliders/Boxes to current values
@@ -85,9 +99,6 @@ namespace EZKey
                 cbConfigs.Items.Add(entry);
             }
             cbConfigs.SelectedIndex = Manager.currentTheme;
-
-
-            initialized = true;
         }
 
 
@@ -522,7 +533,7 @@ namespace EZKey
             Manager.currentTheme = cbConfigs.SelectedIndex;
             if (this.IsLoaded)
             {
-                new Options().Show();
+                new Options(this.Left, this.Top).Show();
                 this.Close();
             }
         }
