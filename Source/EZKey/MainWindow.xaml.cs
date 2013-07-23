@@ -34,6 +34,7 @@ using System.Windows.Shapes;
 using System.Reflection;
 //using System.Drawing;
 //using ColorPicker;
+using System.IO;
 
 namespace EZKey
 {
@@ -66,6 +67,14 @@ namespace EZKey
             Manager.KeyDown += displayKeyDown;
             Manager.KeyUp += displayKeyUp;
             Manager.OptionChanged += setOptions;
+
+            Manager.cfgPaths = new Dictionary<int, string>();
+
+            foreach (string file in Directory.EnumerateFiles(Manager.ThemePath, "*.ezc", SearchOption.AllDirectories))
+            {
+                Manager.comboBoxItems.Add(System.IO.Path.GetFileNameWithoutExtension(file));
+                Manager.cfgPaths.Add(Manager.comboBoxItems.Count - 1, file);
+            }
 
             Manager.InitStandards();
             Manager.LoadStandards();

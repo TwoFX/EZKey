@@ -31,6 +31,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using FilePath = System.IO.Path;
 
 namespace EZKey
 {
@@ -40,12 +42,14 @@ namespace EZKey
     public partial class Options : Window
     {
 
-        bool initialized = false;
+        private bool initialized = false;
 
 
         public Options()
         {
             InitializeComponent();
+
+            // Set Sliders/Boxes to current values
             sldrRoundness.Value = Manager.Roundness;
             sldrSize.Value = Manager.Size;
             sldrFontSize.Value = Manager.FontSize;
@@ -66,6 +70,7 @@ namespace EZKey
             cbBold.IsChecked = Manager.FontW == FontWeights.Bold;
             tbFontFamily.Text = Manager.Font.ToString();
 
+            // Button Colors
             btnStrokeKeyStroke.Background = new SolidColorBrush(Manager.BorderPressed);
             btnBackground.Background = new SolidColorBrush(Manager.Background);
             btnForeground.Background = new SolidColorBrush(Manager.Foreground);
@@ -74,8 +79,18 @@ namespace EZKey
             btnFont.Background = new SolidColorBrush(Manager.Text);
             btnFontPressed.Background = new SolidColorBrush(Manager.TextPressed);
 
+            // Fill the combobox
+            foreach (string entry in Manager.comboBoxItems)
+            {
+                cbConfigs.Items.Add(entry);
+            }
+            cbConfigs.SelectedIndex = Manager.currentTheme;
+
+
             initialized = true;
         }
+
+
 
         private System.Windows.Media.Color DToM(System.Drawing.Color input)
         {
@@ -86,8 +101,6 @@ namespace EZKey
         {
             return System.Drawing.Color.FromArgb(input.A, input.R, input.G, input.B);
         }
-
-
 
         private void Slider_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -397,51 +410,104 @@ namespace EZKey
             ofd.InitialDirectory = Manager.ThemePath;
             if (ofd.ShowDialog() == true)
             {
-                Manager.ApplyConfig(
-                    System.IO.File.ReadAllLines(ofd.FileName)
-                    .Select<string, string[]>(x => x
-                    .Split(new char[] { ' ' }, 2, StringSplitOptions.RemoveEmptyEntries)));
+                if (Manager.cfgPaths.Values.Contains(ofd.FileName)) // Did the user load a file that we already know?
+                {
+                    findConfigItemAndSelect(ofd.FileName);
+                }
+                else
+                {
+                    parseConfigFile(ofd.FileName);
+                    addConfigItemAndSelect(ofd.FileName);
+                }
             }
-            new Options().Show();
-            this.Close();
         }
 
-        private void btnSaveConf_Click(object sender, RoutedEventArgs e)
+        private void btnSaveConf_Click(object sender, RoutedEventArgs e) // = Save AS
         {
             Microsoft.Win32.SaveFileDialog sfd = new Microsoft.Win32.SaveFileDialog();
             sfd.Filter = "EZKey Config Files|*.ezc|All Files|*.*";
             sfd.InitialDirectory = Manager.ThemePath;
             if (sfd.ShowDialog() == true)
             {
-                System.IO.StreamWriter sw = new System.IO.StreamWriter(sfd.FileName);
-                foreach (System.Reflection.FieldInfo field in typeof(Manager).GetFields())
+                saveConfigFile(sfd.FileName);
+                if (Manager.cfgPaths.Values.Contains(sfd.FileName)) // Did the user save to a file that we already know?
                 {
-                    if (typeof(Manager).GetFields().Any(x => x.Name == "d" + field.Name) &&
-                        !(typeof(Manager).GetField("d" + field.Name).GetValue(null).Equals(field.GetValue(null))))
-                    {
-                        string l = field.Name + " ";
-                        if (field.FieldType == typeof(string) ||
-                            field.FieldType == typeof(Color) ||
-                            field.FieldType == typeof(FontFamily) ||
-                            field.FieldType == typeof(int))
-                            l += field.GetValue(null).ToString();
-                        else if (field.FieldType == typeof(bool))
-                            l += (bool)field.GetValue(null) ? "#t" : "#f";
-                        else if (field.FieldType == typeof(FontWeight))
-                            l += (FontWeight)field.GetValue(null) == FontWeights.Bold ? "#t" : "#f";
-                        else if (field.FieldType == typeof(FontStyle))
-                            l += (FontStyle)field.GetValue(null) == FontStyles.Italic ? "#t" : "#f";
-                        else if (field.FieldType == typeof(double))
-                        {
-                            double m = (double)field.GetValue(null);
-                            l += m.ToString(new System.Globalization.CultureInfo("en-US"));
-                        }
-                        else continue; // Should never be the case anymore
-                        sw.WriteLine(l);
-                    }
+                    findConfigItemAndSelect(sfd.FileName);
                 }
-                sw.Close();
+                else
+                {
+                    addConfigItemAndSelect(sfd.FileName);
+                }
             }
+        }
+
+        private void findConfigItemAndSelect(string path)
+        {
+            int foundIndex = Manager.cfgPaths.FirstOrDefault(x => x.Value == path).Key;
+            cbConfigs.SelectedIndex = foundIndex;
+            Manager.currentTheme = foundIndex;
+        }
+
+        private void addConfigItemAndSelect(string path)
+        {
+            int newIndex = addConfigItem(path);
+            Manager.currentTheme = newIndex;
+            cbConfigs.SelectedIndex = newIndex;
+        }
+
+        private int addConfigItem(string path)
+        {
+            string displayName = System.IO.Path.GetFileNameWithoutExtension(path);
+            int displayIndex = Manager.comboBoxItems.Count;
+
+            Manager.cfgPaths.Add(displayIndex, path);
+
+            Manager.comboBoxItems.Add(displayName);
+            cbConfigs.Items.Add(displayName);
+            cbConfigs.SelectedIndex = displayIndex;
+            
+
+            return displayIndex;
+        }
+
+        private void saveConfigFile(string fileName)
+        {
+            StreamWriter sw = new StreamWriter(fileName);
+            foreach (System.Reflection.FieldInfo field in typeof(Manager).GetFields())
+            {
+                if (typeof(Manager).GetFields().Any(x => x.Name == "d" + field.Name) &&
+                    !(typeof(Manager).GetField("d" + field.Name).GetValue(null).Equals(field.GetValue(null))))
+                {
+                    string l = field.Name + " ";
+                    if (field.FieldType == typeof(string) ||
+                        field.FieldType == typeof(Color) ||
+                        field.FieldType == typeof(FontFamily) ||
+                        field.FieldType == typeof(int))
+                        l += field.GetValue(null).ToString();
+                    else if (field.FieldType == typeof(bool))
+                        l += (bool)field.GetValue(null) ? "#t" : "#f";
+                    else if (field.FieldType == typeof(FontWeight))
+                        l += (FontWeight)field.GetValue(null) == FontWeights.Bold ? "#t" : "#f";
+                    else if (field.FieldType == typeof(FontStyle))
+                        l += (FontStyle)field.GetValue(null) == FontStyles.Italic ? "#t" : "#f";
+                    else if (field.FieldType == typeof(double))
+                    {
+                        double m = (double)field.GetValue(null);
+                        l += m.ToString(new System.Globalization.CultureInfo("en-US"));
+                    }
+                    else continue; // Should never be the case anymore
+                    sw.WriteLine(l);
+                }
+            }
+            sw.Close();
+        }
+
+        private void parseConfigFile(string fileName)
+        {
+            Manager.ApplyConfig(
+                    File.ReadAllLines(fileName)
+                    .Select<string, string[]>(x => x
+                    .Split(new char[] { ' ' }, 2, StringSplitOptions.RemoveEmptyEntries)));
         }
 
         private void btnRestoreSettings_Click(object sender, RoutedEventArgs e)
@@ -449,6 +515,24 @@ namespace EZKey
             Manager.LoadStandards();
             new Options().Show();
             this.Close();
+        }
+
+        private void cbConfigs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbConfigs.SelectedIndex == 0)
+            {
+                Manager.LoadStandards();
+            }
+            else
+            {
+                parseConfigFile(Manager.cfgPaths[cbConfigs.SelectedIndex]);
+            }
+            Manager.currentTheme = cbConfigs.SelectedIndex;
+            if (this.IsLoaded)
+            {
+                new Options().Show();
+                this.Close();
+            }
         }
     }
 }

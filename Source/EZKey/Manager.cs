@@ -57,7 +57,9 @@ namespace EZKey
         public static FontStyle dFontS;
 
         public static string ThemePath = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"\Themes\";
-
+        public static int currentTheme = 0;
+        public static List<string> comboBoxItems = new List<string>() { "<default>" };
+        public static Dictionary<int, string> cfgPaths;
 
 
         public static void InitStandards()
