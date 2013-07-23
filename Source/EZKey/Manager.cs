@@ -56,6 +56,8 @@ namespace EZKey
         public static FontWeight dFontW;
         public static FontStyle dFontS;
 
+        public static string ThemePath = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"\Themes\";
+
 
 
         public static void InitStandards()

@@ -394,6 +394,7 @@ namespace EZKey
         {
             Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
             ofd.Filter = "EZKey Config Files|*.ezc|All Files|*.*";
+            ofd.InitialDirectory = Manager.ThemePath;
             if (ofd.ShowDialog() == true)
             {
                 Manager.ApplyConfig(
@@ -409,6 +410,7 @@ namespace EZKey
         {
             Microsoft.Win32.SaveFileDialog sfd = new Microsoft.Win32.SaveFileDialog();
             sfd.Filter = "EZKey Config Files|*.ezc|All Files|*.*";
+            sfd.InitialDirectory = Manager.ThemePath;
             if (sfd.ShowDialog() == true)
             {
                 System.IO.StreamWriter sw = new System.IO.StreamWriter(sfd.FileName);
