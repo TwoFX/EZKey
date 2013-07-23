@@ -209,6 +209,17 @@ namespace EZKey
                     l.FontWeight = Manager.FontW;
                     l.FontStyle = Manager.FontS;
                     l.FontSize = Manager.FontSize * 46.0;
+
+                    FormattedText measurer;
+                    do
+                    {
+                        measurer = new FormattedText(l.Content.ToString(), System.Globalization.CultureInfo.CurrentUICulture,
+                            System.Windows.FlowDirection.LeftToRight, new Typeface(Manager.Font, Manager.FontS, Manager.FontW, FontStretches.Medium),
+                            l.FontSize, new SolidColorBrush(Manager.Text));
+
+                        l.FontSize -= 0.01;
+                    } while (measurer.Height > c.Height - 12 || measurer.Width > c.Width - 12);
+
                     l.Foreground = new SolidColorBrush(Manager.Text);
                     l.Margin = new Thickness(c.Margin.Left, c.Margin.Top, 0, 0);
                 }
@@ -217,6 +228,8 @@ namespace EZKey
             this.grid.Height = keyLayout.Max(x => x == null ? 0 : x.Margin.Top + x.Height) + 25;
             this.grid.Background = new SolidColorBrush(Manager.Background);
             lblOptions.Width = this.grid.Width;
+            //lblOptions.Content = new FormattedText("Backspace", System.Globalization.CultureInfo.CurrentUICulture, System.Windows.FlowDirection.LeftToRight,
+                //new Typeface(Manager.Font, Manager.FontS, Manager.FontW, FontStretches.Medium), Manager.FontSize * 46.0, new SolidColorBrush(Manager.Text)).Width - keyLayout[48].Width;
             Layout = Manager.Layout;
         }
 

@@ -32,3 +32,13 @@
 * Saving no longer writes values that do not differ from the default values (Config files from Version 0.5.1 will still work)
 * Refined the way default values are handled by the manager
 * Minor fixes and cleanup
+
+#####Version 0.5.3 (Jul 23, 2013)
+* The options label now automatically changes color so it is visible regardless of the selected background color
+* Open and save dialog now point to the Themes folder when first opened
+* The program now scans the Themes folder upon starup and imports all configs into a list. The user can import other configs and access all easily from within the program
+* Removed the default settings button as it can be accessed through the new menu
+* The options menu now no longer changes its position when refreshed
+* Changes to the config can now be saved to the last loaded file using the save to selectede button
+* Text that would exceed the key gets automatically downscaled
+* Updated the included theme files to the optimized format introduced in 0.5.2

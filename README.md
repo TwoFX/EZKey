@@ -36,9 +36,9 @@ This page is also work in progress, btw. I will put a detailed explaination abou
 
 ### Upcoming versions
 Features I am currently working on and in which versions they will be released.
-Current version: **0.5.2** ([View changelog](https://github.com/TwoFX/EZKey/blob/master/CHANGELOG.md))
+Current version: **0.5.3** ([View changelog](https://github.com/TwoFX/EZKey/blob/master/CHANGELOG.md))
 
-* **0.5.3** Text that gets bigger than the key gets dynamically scaled down (This has been an issue especially with the backpace key)
+* **0.5.4** An alternative default config can be stored in the Themes folder to be loaded on starrtup
 * **0.6.0** An interactive edit mode that lets the user create and modify keyboard layouts and labels
 
 ### Setup guide for streamers

@@ -49,7 +49,7 @@
         <Button x:Name="btnSetLockKey" Content="Set" HorizontalAlignment="Left" Margin="267,444,0,0" VerticalAlignment="Top" Width="142" Click="btnSetLockKey_Click"/>
         <CheckBox x:Name="cbMask" Content="Mask on Lock:" HorizontalAlignment="Left" Margin="10,478,0,0" VerticalAlignment="Top" Checked="cbMask_Checked" Unchecked="cbMask_Unchecked"/>
         <TextBox x:Name="tbMask" HorizontalAlignment="Left" Height="23" Margin="163,475,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="246" IsEnabled="False" Text="?" TextChanged="tbMask_TextChanged"/>
-        <Label Content="Internal Alpha Build" HorizontalAlignment="Left" Margin="10,557,0,0" VerticalAlignment="Top"/>
+        <Label Content="Version 0.5.3 (Alpha)" HorizontalAlignment="Left" Margin="10,557,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnBackground" Content="" HorizontalAlignment="Left" Margin="384,199,0,0" VerticalAlignment="Top" Width="25" Click="btnBackground_Click" Focusable="False" Height="23"/>
         <Button x:Name="btnForeground" Content="" HorizontalAlignment="Left" Margin="384,227,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23" Click="btnForeground_Click"/>
         <Button x:Name="btnFgKs" Content="" HorizontalAlignment="Left" Margin="384,255,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23" Click="btnFgKs_Click"/>
