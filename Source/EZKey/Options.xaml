@@ -68,8 +68,9 @@
         <Button x:Name="btnFontFamily" Content="Load" HorizontalAlignment="Left" Margin="315,395,0,0" VerticalAlignment="Top" Width="94" Height="23" Click="btnFontFamily_Click"/>
         <CheckBox x:Name="cbBold" Content="Bold" HorizontalAlignment="Left" Margin="168,423,0,0" VerticalAlignment="Top" Checked="cbBold_Checked" Unchecked="cbBold_Unchecked"/>
         <CheckBox x:Name="cbItalic" Content="Italic" HorizontalAlignment="Left" Margin="235,423,0,0" VerticalAlignment="Top" Checked="cbItalic_Checked" Unchecked="cbItalic_Unchecked"/>
-        <Button x:Name="btnSaveConf" Content="Save Config" HorizontalAlignment="Left" Margin="10,530,0,0" VerticalAlignment="Top" Width="197" Click="btnSaveConf_Click"/>
-        <Button x:Name="btnLoadConf" Content="Load Config" HorizontalAlignment="Left" Margin="212,530,0,0" VerticalAlignment="Top" Width="197" Click="btnLoadConf_Click"/>
+        <Button x:Name="btnSaveConf" Content="Save as" HorizontalAlignment="Left" Margin="10,530,0,0" VerticalAlignment="Top" Width="129" Click="btnSaveConf_Click"/>
+        <Button x:Name="btnLoadConf" Content="Load" HorizontalAlignment="Left" Margin="278,530,0,0" VerticalAlignment="Top" Width="129" Click="btnLoadConf_Click"/>
         <ComboBox x:Name="cbConfigs" HorizontalAlignment="Left" Margin="10,503,0,0" VerticalAlignment="Top" Width="399" SelectionChanged="cbConfigs_SelectionChanged"/>
+        <Button x:Name="btnsaveSelec" Content="Save to selected" HorizontalAlignment="Left" Margin="144,530,0,0" VerticalAlignment="Top" Width="129" Click="btnsaveSelec_Click"/>
     </Grid>
 </Window>

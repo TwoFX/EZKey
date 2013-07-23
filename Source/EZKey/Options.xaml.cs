@@ -439,15 +439,20 @@ namespace EZKey
             sfd.InitialDirectory = Manager.ThemePath;
             if (sfd.ShowDialog() == true)
             {
-                saveConfigFile(sfd.FileName);
-                if (Manager.cfgPaths.Values.Contains(sfd.FileName)) // Did the user save to a file that we already know?
-                {
-                    findConfigItemAndSelect(sfd.FileName);
-                }
-                else
-                {
-                    addConfigItemAndSelect(sfd.FileName);
-                }
+                saveToLocation(sfd.FileName);
+            }
+        }
+
+        private void saveToLocation(string path)
+        {
+            saveConfigFile(path);
+            if (Manager.cfgPaths.Values.Contains(path)) // Did the user save to a file that we already know?
+            {
+                findConfigItemAndSelect(path);
+            }
+            else
+            {
+                addConfigItemAndSelect(path);
             }
         }
 
@@ -536,6 +541,11 @@ namespace EZKey
                 new Options(this.Left, this.Top).Show();
                 this.Close();
             }
+        }
+
+        private void btnsaveSelec_Click(object sender, RoutedEventArgs e) // = Save to selected config
+        {
+            saveToLocation(Manager.cfgPaths[Manager.currentTheme]);
         }
     }
 }
