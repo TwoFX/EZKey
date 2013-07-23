@@ -416,7 +416,6 @@ namespace EZKey
                 }
                 else
                 {
-                    parseConfigFile(ofd.FileName);
                     addConfigItemAndSelect(ofd.FileName);
                 }
             }
@@ -508,13 +507,6 @@ namespace EZKey
                     File.ReadAllLines(fileName)
                     .Select<string, string[]>(x => x
                     .Split(new char[] { ' ' }, 2, StringSplitOptions.RemoveEmptyEntries)));
-        }
-
-        private void btnRestoreSettings_Click(object sender, RoutedEventArgs e)
-        {
-            Manager.LoadStandards();
-            new Options().Show();
-            this.Close();
         }
 
         private void cbConfigs_SelectionChanged(object sender, SelectionChangedEventArgs e)
