@@ -476,6 +476,8 @@ namespace EZKey
             int displayIndex = Manager.comboBoxItems.Count;
 
             Manager.cfgPaths.Add(displayIndex, path);
+
+            cbConfigs.Items.Add(displayName);
             Manager.comboBoxItems.Add(displayName);
 
             return displayIndex;
