@@ -45,7 +45,6 @@ namespace EZKey
         //private int lastCode = 0;
         private Rectangle[] keyLayout;
         private Label[] lblLayout;
-        private int draggedRect;
         private Dictionary<int, int> Layout;
         private string[] lbls = Manager.Lables;
         private int keyDex = 71; // Highest index of keys
@@ -64,13 +63,9 @@ namespace EZKey
         {
             InterceptKeys.Load();
 
-            draggedRect = -1;
-
             Manager.KeyDown += displayKeyDown;
             Manager.KeyUp += displayKeyUp;
             Manager.OptionChanged += setOptions;
-
-            Manager.master = this;
 
             Manager.InitStandards();
             Manager.LoadStandards();
@@ -266,6 +261,16 @@ namespace EZKey
             new Options().Show();
         }
 
+        private void lblLayout_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void lblLoad_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+
         private void lblSave_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -278,48 +283,6 @@ namespace EZKey
         {
             InterceptKeys.UnLoad();
             Application.Current.Shutdown();
-        }
-
-        public void EnableEditMode()
-        {
-            foreach (Rectangle rect in keyLayout)
-            {
-                if (rect != null)
-                {
-                    rect.MouseDown += EditMouseDown;
-                    rect.MouseUp += EditMouseUp;
-                    rect.MouseMove += EditMouseMove;
-                }
-            }
-            
-            MessageBox.Show("Edit Mode initialized");
-        }
-
-        public void EditMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            MessageBox.Show(sender.ToString());
-            draggedRect = Array.IndexOf<Rectangle>(keyLayout, (Rectangle)sender);
-            ((Rectangle)sender).CaptureMouse();
-        }
-
-        public void EditMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            MessageBox.Show(sender.ToString());
-            draggedRect = -1;
-            ((Rectangle)sender).ReleaseMouseCapture();
-        }
-
-        public void EditMouseMove(object sender, MouseEventArgs e)
-        {
-            Rectangle cRect = (Rectangle)sender;
-            if (Array.IndexOf<Rectangle>(keyLayout, cRect) == draggedRect)
-            {
-                Point mousePos = e.GetPosition(grid);
-
-                double left = mousePos.X - (cRect.ActualWidth / 2);
-                double top = mousePos.Y - (cRect.ActualHeight / 2);
-                cRect.Margin = new Thickness(left, top, 0, 0);
-            }
         }
     }
 }
