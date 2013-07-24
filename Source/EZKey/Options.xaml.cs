@@ -448,5 +448,28 @@ namespace EZKey
             new Options().Show();
             this.Close();
         }
+
+        private void saveLayout(string path)
+        {
+            System.IO.StreamWriter sw = new System.IO.StreamWriter(path);
+            foreach (Rectangle rect in Manager.master.KeyLayout.Where(x => x != null))
+            {
+                int rectIndex = Array.IndexOf(Manager.master.KeyLayout, rect);
+                string[] info = {"key",
+                                    rect.Margin.Left.ToString(), // x
+                                    rect.Margin.Top.ToString(), // y
+                                    (rect.Width / Manager.Size).ToString(), // sizeX
+                                    (rect.Height / Manager.Size).ToString(), // sizeY
+                                    Manager.master.IsSpecialKey[rectIndex] ? "#t" : "#f", // IsSpecialKey
+                                    Manager.Lables[rectIndex], // label
+                                    Manager.Layout[rectIndex].ToString()}; // keyCode
+
+            }
+        }
+
+        private void btnSaveLayout_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

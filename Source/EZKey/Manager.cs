@@ -30,6 +30,8 @@ namespace EZKey
 {
     static class Manager
     {
+        public static MainWindow master;
+
         public delegate void KeyHandler(int KeyCode);
         public delegate void OptionChangedHandler();
         public static OptionChangedHandler OptionChanged;
@@ -58,8 +60,10 @@ namespace EZKey
 
 
 
-        public static void InitStandards()
+        public static void InitStandards(MainWindow master)
         {
+            Manager.master = master;
+
             Manager.dBackground = (Color)ColorConverter.ConvertFromString("#FFDDDDDD");
             Manager.dForeground = Colors.White;
             Manager.dForegroundPressed = Colors.Orange;

@@ -47,14 +47,26 @@ namespace EZKey
         private Label[] lblLayout;
         private Dictionary<int, int> Layout;
         private string[] lbls = Manager.Lables;
+        private bool[] isSpecialKey;
         private int keyDex = 71; // Highest index of keys
         private bool lockMode = false;
+
+        public Rectangle[] KeyLayout
+        {
+            get { return keyLayout; }
+        }
+
+        public bool[] IsSpecialKey
+        {
+            get { return isSpecialKey; }
+        }
 
         public MainWindow()
         {
 
             keyLayout = new Rectangle[keyDex];
             lblLayout = new Label[keyDex];
+            isSpecialKey = new bool[keyDex];
             Layout = Manager.Layout;
             InitializeComponent();
         }
@@ -67,7 +79,7 @@ namespace EZKey
             Manager.KeyUp += displayKeyUp;
             Manager.OptionChanged += setOptions;
 
-            Manager.InitStandards();
+            Manager.InitStandards(this);
             Manager.LoadStandards();
 
             for (int i = 0; i < keyDex; i++)
@@ -104,6 +116,7 @@ namespace EZKey
                     c.StrokeThickness = Manager.BorderThickness * 4 * Manager.Size * 4;
                     c.Stroke = new SolidColorBrush(Manager.Border);
                     c.RadiusX = c.RadiusY = Manager.Roundness * 15.0 * Manager.Size * 4;
+                    isSpecialKey[i] = false;
                     if (i < 47)
                     {
                         c.Height = c.Width = Manager.Size * 120.0;
@@ -186,6 +199,7 @@ namespace EZKey
                     {
                         c.Height = c.Width = Manager.Size * 120.0;
                         c.Margin = new Thickness(Manager.BasicOffsetY * 80.0 + (8 + i * 4 - 232 + Math.Floor((i - 58) / 4.0) * 2) * Manager.OffsetX * 36.0 * Manager.Size * 4, Manager.BasicOffsetY * 80.0, 0, 0);
+                        isSpecialKey[i] = true;
                     }
                     else // Escape Key
                     {
