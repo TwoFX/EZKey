@@ -38,7 +38,7 @@ This page is also work in progress, btw. I will put a detailed explaination abou
 Features I am currently working on and in which versions they will be released.
 Current version: **0.5.3** ([View changelog](https://github.com/TwoFX/EZKey/blob/master/CHANGELOG.md))
 
-* **0.5.4** An alternative default config can be stored in the Themes folder to be loaded on starrtup
+* **0.5.4** An alternative default config can be stored in the Themes folder to be loaded on startup
 * **0.6.0** An interactive edit mode that lets the user create and modify keyboard layouts and labels
 
 ### Setup guide for streamers
