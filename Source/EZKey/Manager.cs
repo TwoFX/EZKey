@@ -103,6 +103,17 @@ namespace EZKey
             }
         }
 
+        public static void SetField(string name, object value)
+        {
+            typeof(Manager).GetField(name).SetValue(null, value);
+            TriggerOptionChanged();
+        }
+
+        public static object GetField(string name)
+        {
+            return typeof(Manager).GetField(name).GetValue(null);
+        }
+
         public static void ApplyConfig(IEnumerable<string[]> values)
         {
             LoadStandards();

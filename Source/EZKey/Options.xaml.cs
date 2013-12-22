@@ -65,13 +65,6 @@ namespace EZKey
             InitializeComponent();
 
             // Set Sliders/Boxes to current values
-            sldrRoundness.Value = Manager.Roundness;
-            sldrSize.Value = Manager.Size;
-            sldrFontSize.Value = Manager.FontSize;
-            sldrStrokeThickness.Value = Manager.BorderThickness;
-            sldrOffsetX.Value = Manager.OffsetX;
-            sldrOffsetY.Value = Manager.OffsetY;
-            sldrFOffset.Value = Manager.tOffsetY;
             lblMaskKey.Content = Manager.Lables[Manager.Layout[Manager.lockKey]];
             cbMask.IsChecked = Manager.lockMaskEnabled;
             cbItalic.IsChecked = Manager.FontS == FontStyles.Italic;
@@ -94,6 +87,12 @@ namespace EZKey
             bindSlider(sldrOffsetY, "OffsetY");
             bindSlider(sldrFOffset, "tOffsetY");
 
+            //bindSetEvent<RoutedEventArgs>(btnFontFamily.Click, x => new FontFamily(tbFontFamily.Text), "Font");
+            btnFontFamily.Click += (sender, e) => Manager.SetField("Font", new FontFamily(tbFontFamily.Text));
+            cbBold.Checked += (sender, e) => Manager.SetField("FontW", FontWeights.Bold);
+            cbBold.Unchecked += (sender, e) => Manager.SetField("FontW", FontWeights.Normal);
+            cbItalic.Checked += (sender, e) => Manager.SetField("FontS", FontStyles.Italic);
+            cbItalic.Unchecked += (sender, e) => Manager.SetField("FontS", FontStyles.Normal);
 
             // Fill the combobox
             foreach (string entry in Manager.comboBoxItems)
@@ -101,8 +100,6 @@ namespace EZKey
                 cbConfigs.Items.Add(entry);
             }
             cbConfigs.SelectedIndex = Manager.currentTheme;
-
-            
         }
 
         #region Helper Functions
@@ -142,29 +139,28 @@ namespace EZKey
         }
 
         #endregion
+
         private void bindSlider(Slider slider, string managerField)
         {
-            var fieldHandler = getHandlers<double>(typeof(Manager).GetField(managerField));
-
+            slider.Value = (double)Manager.GetField(managerField);
             slider.ValueChanged +=
                 (object sender, RoutedPropertyChangedEventArgs<double> e) =>
                 {
-                    fieldHandler.Item2(e.NewValue);
-                    Manager.TriggerOptionChanged();
+                    Manager.SetField(managerField, e.NewValue);
                 };
         }
 
-        private Tuple<Func<T>, Action<T>> getHandlers<T>(FieldInfo field, object instance = null)
+        private Action<object, TArgs> setHandler<TArgs>(Func<TArgs, object> evalArgs, string managerField)
         {
-            return new Tuple<Func<T>, Action<T>>(() => (T)field.GetValue(instance), value => field.SetValue(instance, value));
+            return (sender, e) =>
+                Manager.SetField(managerField, evalArgs(e));
         }
 
         private void bindColors(TextBox codeBox, Button dialogButton, string managerField)
         {
-            var fieldHandler = getHandlers<Color>(typeof(Manager).GetField(managerField));
 
-            dialogButton.Background = new SolidColorBrush(fieldHandler.Item1());
-            codeBox.Text = fieldHandler.Item1().ToString();
+            dialogButton.Background = new SolidColorBrush((Color)Manager.GetField(managerField));
+            codeBox.Text = ((Color)Manager.GetField(managerField)).ToString();
 
             codeBox.TextChanged +=
                 (object sender, TextChangedEventArgs e) =>
@@ -174,7 +170,7 @@ namespace EZKey
                         Color? clr = ConvertColor(codeBox.Text);
                         if (clr != null)
                         {
-                            fieldHandler.Item2((Color)clr);
+                            Manager.SetField(managerField, ((Color)clr));
                             dialogButton.Background = new SolidColorBrush((Color)clr);
                             Manager.TriggerOptionChanged();
                         }
@@ -184,8 +180,8 @@ namespace EZKey
             dialogButton.Click +=
                 (object sender, RoutedEventArgs e) =>
                 {
-                    Color clr = getColor(fieldHandler.Item1());
-                    fieldHandler.Item2(clr);
+                    Color clr = getColor((Color)Manager.GetField(managerField));
+                    Manager.SetField(managerField, clr);
                     dialogButton.Background = new SolidColorBrush(clr);
                     codeBox.Text = clr.ToString();
                 };
@@ -222,40 +218,6 @@ namespace EZKey
             Manager.lockKey = keyCode;
             lblMaskKey.Content = Manager.Lables[Manager.Layout[Manager.lockKey]];
             btnSetLockKey.Content = "Set";
-        }
-
-        #endregion
-        
-        #region Fonts
-
-        private void btnFontFamily_Click(object sender, RoutedEventArgs e)
-        {
-            Manager.Font = new FontFamily(tbFontFamily.Text);
-            Manager.TriggerOptionChanged();
-        }
-
-        private void cbBold_Checked(object sender, RoutedEventArgs e)
-        {
-            Manager.FontW = FontWeights.Bold;
-            Manager.TriggerOptionChanged();
-        }
-
-        private void cbBold_Unchecked(object sender, RoutedEventArgs e)
-        {
-            Manager.FontW = FontWeights.Normal;
-            Manager.TriggerOptionChanged();
-        }
-
-        private void cbItalic_Checked(object sender, RoutedEventArgs e)
-        {
-            Manager.FontS = FontStyles.Italic;
-            Manager.TriggerOptionChanged();
-        }
-
-        private void cbItalic_Unchecked(object sender, RoutedEventArgs e)
-        {
-            Manager.FontS = FontStyles.Normal;
-            Manager.TriggerOptionChanged();
         }
 
         #endregion
