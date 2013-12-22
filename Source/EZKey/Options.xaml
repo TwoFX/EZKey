@@ -36,32 +36,32 @@
         <Label Content="Key Offset Y:" HorizontalAlignment="Left" Margin="10,141,0,0" VerticalAlignment="Top"/>
         <Slider x:Name="sldrFOffset" HorizontalAlignment="Left" Margin="163,172,0,0" VerticalAlignment="Top" Width="246" ValueChanged="sldrFOffset_ValueChanged" Maximum="1"/>
         <Label Content="F-Key Offset Y:" HorizontalAlignment="Left" Margin="10,168,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbBackground" HorizontalAlignment="Left" Height="23" Margin="163,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" TextChanged="TextBox_TextChanged"/>
+        <TextBox x:Name="tbBackground" HorizontalAlignment="Left" Height="23" Margin="163,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"/>
         <Label Content="Background:" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbForeground" HorizontalAlignment="Left" Height="23" Margin="163,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" TextChanged="TextBox_TextChanged_1"/>
+        <TextBox x:Name="tbForeground" HorizontalAlignment="Left" Height="23" Margin="163,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"/>
         <Label Content="Foreground:" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top" Width="148"/>
-        <TextBox x:Name="tbFGPressed" HorizontalAlignment="Left" Height="23" Margin="163,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" TextChanged="tbFGPressed_TextChanged"/>
+        <TextBox x:Name="tbFGPressed" HorizontalAlignment="Left" Height="23" Margin="163,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"/>
         <Label Content="Foreground on keystroke:" HorizontalAlignment="Left" Margin="10,252,0,0" VerticalAlignment="Top" Width="148"/>
         <Label Content="Stroke Color:" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbStrokeClr" HorizontalAlignment="Left" Height="23" Margin="163,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" TextChanged="tbStrokeClr_TextChanged"/>
+        <TextBox x:Name="tbStrokeClr" HorizontalAlignment="Left" Height="23" Margin="163,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"/>
         <Label Content="Lock Hotkey:" HorizontalAlignment="Left" Margin="10,440,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblMaskKey" Content="" HorizontalAlignment="Left" Margin="163,444,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnSetLockKey" Content="Set" HorizontalAlignment="Left" Margin="267,444,0,0" VerticalAlignment="Top" Width="142" Click="btnSetLockKey_Click"/>
         <CheckBox x:Name="cbMask" Content="Mask on Lock:" HorizontalAlignment="Left" Margin="10,478,0,0" VerticalAlignment="Top" Checked="cbMask_Checked" Unchecked="cbMask_Unchecked"/>
         <TextBox x:Name="tbMask" HorizontalAlignment="Left" Height="23" Margin="163,475,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="246" IsEnabled="False" Text="?" TextChanged="tbMask_TextChanged"/>
         <Label Content="Complete Rewrite Prototype" HorizontalAlignment="Left" Margin="10,557,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnBackground" Content="" HorizontalAlignment="Left" Margin="384,199,0,0" VerticalAlignment="Top" Width="25" Click="btnBackground_Click" Focusable="False" Height="23"/>
-        <Button x:Name="btnForeground" Content="" HorizontalAlignment="Left" Margin="384,227,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23" Click="btnForeground_Click"/>
-        <Button x:Name="btnFgKs" Content="" HorizontalAlignment="Left" Margin="384,255,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23" Click="btnFgKs_Click"/>
-        <Button x:Name="btnStroke" Content="" HorizontalAlignment="Left" Margin="384,283,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23" Click="btnStroke_Click"/>
+        <Button x:Name="btnBackground" Content="" HorizontalAlignment="Left" Margin="384,199,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23"/>
+        <Button x:Name="btnForeground" Content="" HorizontalAlignment="Left" Margin="384,227,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23"/>
+        <Button x:Name="btnFgKs" Content="" HorizontalAlignment="Left" Margin="384,255,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23"/>
+        <Button x:Name="btnStroke" Content="" HorizontalAlignment="Left" Margin="384,283,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23"/>
         <Label Content="Stroke on keystroke:" HorizontalAlignment="Left" Margin="10,309,0,0" VerticalAlignment="Top" Width="123"/>
-        <TextBox x:Name="tbStrokeKeyStroke" HorizontalAlignment="Left" Height="23" Margin="163,311,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" TextChanged="tbStrokeKeyStroke_TextChanged"/>
-        <Button x:Name="btnStrokeKeyStroke" Content="" HorizontalAlignment="Left" Margin="384,311,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23" Click="btnStrokeKeyStroke_Click"/>
+        <TextBox x:Name="tbStrokeKeyStroke" HorizontalAlignment="Left" Height="23" Margin="163,311,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"/>
+        <Button x:Name="btnStrokeKeyStroke" Content="" HorizontalAlignment="Left" Margin="384,311,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23"/>
         <Label Content="Font Color:" HorizontalAlignment="Left" Margin="10,336,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbFont" HorizontalAlignment="Left" Height="23" Margin="163,339,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" TextChanged="tbFont_TextChanged"/>
-        <Button x:Name="btnFont" Content="" HorizontalAlignment="Left" Margin="384,339,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23" Click="btnFont_Click"/>
-        <TextBox x:Name="tbFontPressed" HorizontalAlignment="Left" Height="23" Margin="163,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" TextChanged="tbFontPressed_TextChanged"/>
-        <Button x:Name="btnFontPressed" Content="" HorizontalAlignment="Left" Margin="384,367,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23" Click="btnFontPressed_Click"/>
+        <TextBox x:Name="tbFont" HorizontalAlignment="Left" Height="23" Margin="163,339,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"/>
+        <Button x:Name="btnFont" Content="" HorizontalAlignment="Left" Margin="384,339,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23"/>
+        <TextBox x:Name="tbFontPressed" HorizontalAlignment="Left" Height="23" Margin="163,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"/>
+        <Button x:Name="btnFontPressed" Content="" HorizontalAlignment="Left" Margin="384,367,0,0" VerticalAlignment="Top" Width="25" Focusable="False" Height="23"/>
         <Label Content="Font Color on keystroke:" HorizontalAlignment="Left" Margin="10,364,0,0" VerticalAlignment="Top"/>
         <Label Content="Font:" HorizontalAlignment="Left" Margin="10,392,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbFontFamily" HorizontalAlignment="Left" Height="23" Margin="163,395,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>

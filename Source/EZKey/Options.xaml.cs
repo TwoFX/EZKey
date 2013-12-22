@@ -72,27 +72,20 @@ namespace EZKey
             sldrOffsetX.Value = Manager.OffsetX;
             sldrOffsetY.Value = Manager.OffsetY;
             sldrFOffset.Value = Manager.tOffsetY;
-            tbBackground.Text = Manager.Background.ToString();
-            tbForeground.Text = Manager.Foreground.ToString();
-            tbFGPressed.Text = Manager.ForegroundPressed.ToString();
-            tbStrokeClr.Text = Manager.Border.ToString();
-            tbStrokeKeyStroke.Text = Manager.BorderPressed.ToString();
             lblMaskKey.Content = Manager.Lables[Manager.Layout[Manager.lockKey]];
-            tbFont.Text = Manager.Text.ToString();
-            tbFontPressed.Text = Manager.TextPressed.ToString();
             cbMask.IsChecked = Manager.lockMaskEnabled;
             cbItalic.IsChecked = Manager.FontS == FontStyles.Italic;
             cbBold.IsChecked = Manager.FontW == FontWeights.Bold;
             tbFontFamily.Text = Manager.Font.ToString();
 
-            // Button Colors
-            btnStrokeKeyStroke.Background = new SolidColorBrush(Manager.BorderPressed);
-            btnBackground.Background = new SolidColorBrush(Manager.Background);
-            btnForeground.Background = new SolidColorBrush(Manager.Foreground);
-            btnFgKs.Background = new SolidColorBrush(Manager.ForegroundPressed);
-            btnStroke.Background = new SolidColorBrush(Manager.Border);
-            btnFont.Background = new SolidColorBrush(Manager.Text);
-            btnFontPressed.Background = new SolidColorBrush(Manager.TextPressed);
+            bindColors(tbBackground, btnBackground, "Background");
+            bindColors(tbForeground, btnForeground, "Foreground");
+            bindColors(tbFGPressed, btnFgKs, "ForegroundPressed");
+            bindColors(tbStrokeClr, btnStroke, "Border");
+            bindColors(tbStrokeKeyStroke, btnStrokeKeyStroke, "BorderPressed");
+            bindColors(tbFont, btnFont, "Text");
+            bindColors(tbFontPressed, btnFontPressed, "TextPressed");
+
 
             // Fill the combobox
             foreach (string entry in Manager.comboBoxItems)
@@ -100,6 +93,8 @@ namespace EZKey
                 cbConfigs.Items.Add(entry);
             }
             cbConfigs.SelectedIndex = Manager.currentTheme;
+
+            
         }
 
         #region Helper Functions
@@ -207,13 +202,18 @@ namespace EZKey
 
         #endregion
 
-        private Tuple<Func<T>, Action<T>> getHandlers<T>(object instance, FieldInfo field)
+        private Tuple<Func<T>, Action<T>> getHandlers<T>(FieldInfo field, object instance = null)
         {
             return new Tuple<Func<T>, Action<T>>(() => (T)field.GetValue(instance), value => field.SetValue(instance, value));
         }
 
-        private void bindColors(TextBox codeBox, Button dialogButton, Tuple<Func<Color>, Action<Color>> fieldHandler)
+        private void bindColors(TextBox codeBox, Button dialogButton, string managerField)
         {
+            var fieldHandler = getHandlers<Color>(typeof(Manager).GetField(managerField));
+
+            dialogButton.Background = new SolidColorBrush(fieldHandler.Item1());
+            codeBox.Text = fieldHandler.Item1().ToString();
+
             codeBox.TextChanged +=
                 (object sender, TextChangedEventArgs e) =>
                 {
@@ -238,112 +238,6 @@ namespace EZKey
                     codeBox.Text = clr.ToString();
                 };
         }
-
-        #region Color Textboxes
-
-       
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (initialized)
-            {
-                Color? clr = ConvertColor(tbBackground.Text);
-                if (clr != null)
-                {
-                    Manager.Background = (Color)clr;
-                    btnBackground.Background = new SolidColorBrush((Color)clr);
-                    Manager.TriggerOptionChanged();
-                }
-            }
-        }
-
-
-
-        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
-        {
-            if (initialized)
-            {
-                Color? clr = ConvertColor(tbForeground.Text);
-                if (clr != null)
-                {
-                    Manager.Foreground = (Color)clr;
-                    btnForeground.Background = new SolidColorBrush((Color)clr);
-                    Manager.TriggerOptionChanged();
-                }
-            }
-        }
-
-        private void tbFGPressed_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (initialized)
-            {
-                Color? clr = ConvertColor(tbFGPressed.Text);
-                if (clr != null)
-                {
-                    Manager.ForegroundPressed = (Color)clr;
-                    btnFgKs.Background = new SolidColorBrush((Color)clr);
-                    Manager.TriggerOptionChanged();
-                }
-            }
-        }
-
-        private void tbStrokeClr_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (initialized)
-            {
-                Color? clr = ConvertColor(tbStrokeClr.Text);
-                if (clr != null)
-                {
-                    Manager.Border = (Color)clr;
-                    btnStroke.Background = new SolidColorBrush((Color)clr);
-                    Manager.TriggerOptionChanged();
-                }
-            }
-        }
-
-        private void tbStrokeKeyStroke_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (initialized)
-            {
-                Color? clr = ConvertColor(tbStrokeKeyStroke.Text);
-                if (clr != null)
-                {
-                    Manager.BorderPressed = (Color)clr;
-                    btnStrokeKeyStroke.Background = new SolidColorBrush((Color)clr);
-                    Manager.TriggerOptionChanged();
-                }
-            }
-        }
-
-        private void tbFont_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (initialized)
-            {
-                Color? clr = ConvertColor(tbFont.Text);
-                if (clr != null)
-                {
-                    Manager.Text = (Color)clr;
-                    btnFont.Background = new SolidColorBrush((Color)clr);
-                    Manager.TriggerOptionChanged();
-                }
-            }
-        }
-
-        private void tbFontPressed_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (initialized)
-            {
-                Color? clr = ConvertColor(tbFontPressed.Text);
-                if (clr != null)
-                {
-                    Manager.TextPressed = (Color)clr;
-                    btnFontPressed.Background = new SolidColorBrush((Color)clr);
-                    Manager.TriggerOptionChanged();
-                }
-            }
-        }
-
-        #endregion
 
         #region Misc
 
@@ -376,69 +270,6 @@ namespace EZKey
             Manager.lockKey = keyCode;
             lblMaskKey.Content = Manager.Lables[Manager.Layout[Manager.lockKey]];
             btnSetLockKey.Content = "Set";
-        }
-
-        #endregion
-
-        #region Color Buttons
-
-        private void btnBackground_Click(object sender, RoutedEventArgs e)
-        {
-            Color clr = getColor(Manager.Background);
-            Manager.Background = clr;
-            btnBackground.Background = new SolidColorBrush(clr);
-            tbBackground.Text = clr.ToString();
-        }
-        private void btnForeground_Click(object sender, RoutedEventArgs e)
-        {
-            Color clr = getColor(Manager.Foreground);
-            Manager.Foreground = clr;
-            btnForeground.Background = new SolidColorBrush(clr);
-            tbForeground.Text = clr.ToString();
-        }
-
-        private void btnFgKs_Click(object sender, RoutedEventArgs e)
-        {
-            Color clr = getColor(Manager.ForegroundPressed);
-            Manager.ForegroundPressed = clr;
-            btnFgKs.Background = new SolidColorBrush(clr);
-            tbFGPressed.Text = clr.ToString();
-        }
-
-        private void btnStroke_Click(object sender, RoutedEventArgs e)
-        {
-            Color clr = getColor(Manager.Border);
-            Manager.Border = clr;
-            btnStroke.Background = new SolidColorBrush(clr);
-            tbStrokeClr.Text = clr.ToString();
-        }
-
-
-
-        private void btnStrokeKeyStroke_Click(object sender, RoutedEventArgs e)
-        {
-            Color clr = getColor(Manager.BorderPressed);
-            Manager.BorderPressed = clr;
-            btnStrokeKeyStroke.Background = new SolidColorBrush(clr);
-            tbStrokeKeyStroke.Text = clr.ToString();
-        }
-
-
-
-        private void btnFont_Click(object sender, RoutedEventArgs e)
-        {
-            Color clr = getColor(Manager.Text);
-            Manager.Text = clr;
-            btnFont.Background = new SolidColorBrush(clr);
-            tbFont.Text = clr.ToString();
-        }
-
-        private void btnFontPressed_Click(object sender, RoutedEventArgs e)
-        {
-            Color clr = getColor(Manager.TextPressed);
-            Manager.TextPressed = clr;
-            btnFontPressed.Background = new SolidColorBrush(clr);
-            tbFontPressed.Text = clr.ToString();
         }
 
         #endregion
