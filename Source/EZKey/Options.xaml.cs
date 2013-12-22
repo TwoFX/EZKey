@@ -86,6 +86,14 @@ namespace EZKey
             bindColors(tbFont, btnFont, "Text");
             bindColors(tbFontPressed, btnFontPressed, "TextPressed");
 
+            bindSlider(sldrSize, "Size");
+            bindSlider(sldrRoundness, "Roundness");
+            bindSlider(sldrFontSize, "FontSize");
+            bindSlider(sldrStrokeThickness, "BorderThickness");
+            bindSlider(sldrOffsetX, "OffsetX");
+            bindSlider(sldrOffsetY, "OffsetY");
+            bindSlider(sldrFOffset, "tOffsetY");
+
 
             // Fill the combobox
             foreach (string entry in Manager.comboBoxItems)
@@ -134,73 +142,17 @@ namespace EZKey
         }
 
         #endregion
-
-        #region Sliders
-
-        private void Slider_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void bindSlider(Slider slider, string managerField)
         {
-            if (initialized)
-            {
-                Manager.Roundness = e.NewValue;
-                Manager.TriggerOptionChanged();
-            }
-        }
+            var fieldHandler = getHandlers<double>(typeof(Manager).GetField(managerField));
 
-        private void sldrSize_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            if (initialized)
-            {
-                Manager.Size = e.NewValue;
-                Manager.TriggerOptionChanged();
-            }
+            slider.ValueChanged +=
+                (object sender, RoutedPropertyChangedEventArgs<double> e) =>
+                {
+                    fieldHandler.Item2(e.NewValue);
+                    Manager.TriggerOptionChanged();
+                };
         }
-
-        private void sldrFontSize_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            if (initialized)
-            {
-                Manager.FontSize = e.NewValue;
-                Manager.TriggerOptionChanged();
-            }
-        }
-
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            if (initialized)
-            {
-                Manager.BorderThickness = e.NewValue;
-                Manager.TriggerOptionChanged();
-            }
-        }
-
-        private void sldrOffsetX_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            if (initialized)
-            {
-                Manager.OffsetX = e.NewValue;
-                Manager.TriggerOptionChanged();
-            }
-        }
-
-        private void sldrOffsetY_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            if (initialized)
-            {
-                Manager.OffsetY = e.NewValue;
-                Manager.TriggerOptionChanged();
-            }
-        }
-
-        private void sldrFOffset_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            if (initialized)
-            {
-                Manager.tOffsetY = e.NewValue;
-                Manager.TriggerOptionChanged();
-            }
-        }
-
-        #endregion
 
         private Tuple<Func<T>, Action<T>> getHandlers<T>(FieldInfo field, object instance = null)
         {
@@ -382,7 +334,7 @@ namespace EZKey
         private void saveConfigFile(string fileName)
         {
             StreamWriter sw = new StreamWriter(fileName);
-            foreach (System.Reflection.FieldInfo field in typeof(Manager).GetFields())
+            foreach (FieldInfo field in typeof(Manager).GetFields())
             {
                 if (typeof(Manager).GetFields().Any(x => x.Name == "d" + field.Name) &&
                     !(typeof(Manager).GetField("d" + field.Name).GetValue(null).Equals(field.GetValue(null))))

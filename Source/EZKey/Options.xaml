@@ -22,19 +22,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Options" Height="620" Width="427">
     <Grid>
-        <Slider x:Name="sldrRoundness" HorizontalAlignment="Left" Margin="163,37,0,0" VerticalAlignment="Top" Width="246" Maximum="1" ValueChanged="Slider_ValueChanged_1" Value="0.25"/>
+        <Slider x:Name="sldrRoundness" HorizontalAlignment="Left" Margin="163,37,0,0" VerticalAlignment="Top" Width="246" Maximum="1" Value="0.25"/>
         <Label Content="Size:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Slider x:Name="sldrSize" HorizontalAlignment="Left" Margin="163,10,0,0" VerticalAlignment="Top" Width="246" ValueChanged="sldrSize_ValueChanged" Maximum="1" Minimum="0.1"/>
+        <Slider x:Name="sldrSize" HorizontalAlignment="Left" Margin="163,10,0,0" VerticalAlignment="Top" Width="246" Maximum="1" Minimum="0.1"/>
         <Label Content="Round Edges:" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top"/>
         <Label Content="Font Size:" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
-        <Slider x:Name="sldrFontSize" HorizontalAlignment="Left" Margin="163,64,0,0" VerticalAlignment="Top" Width="246" ValueChanged="sldrFontSize_ValueChanged" Maximum="1" Minimum="0.1"/>
+        <Slider x:Name="sldrFontSize" HorizontalAlignment="Left" Margin="163,64,0,0" VerticalAlignment="Top" Width="246" Maximum="1" Minimum="0.1"/>
         <Label Content="Stroke Thickness:" HorizontalAlignment="Left" Margin="10,87,0,0" VerticalAlignment="Top"/>
-        <Slider x:Name="sldrStrokeThickness" HorizontalAlignment="Left" Margin="163,91,0,0" VerticalAlignment="Top" Width="246" ValueChanged="Slider_ValueChanged" Maximum="1"/>
-        <Slider x:Name="sldrOffsetX" HorizontalAlignment="Left" Margin="163,118,0,0" VerticalAlignment="Top" Width="246" ValueChanged="sldrOffsetX_ValueChanged" Maximum="1"/>
-        <Slider x:Name="sldrOffsetY" HorizontalAlignment="Left" Margin="163,145,0,0" VerticalAlignment="Top" Width="246" ValueChanged="sldrOffsetY_ValueChanged" Maximum="1"/>
+        <Slider x:Name="sldrStrokeThickness" HorizontalAlignment="Left" Margin="163,91,0,0" VerticalAlignment="Top" Width="246" Maximum="1"/>
+        <Slider x:Name="sldrOffsetX" HorizontalAlignment="Left" Margin="163,118,0,0" VerticalAlignment="Top" Width="246" Maximum="1"/>
+        <Slider x:Name="sldrOffsetY" HorizontalAlignment="Left" Margin="163,145,0,0" VerticalAlignment="Top" Width="246" Maximum="1"/>
         <Label Content="Key Offset X:" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
         <Label Content="Key Offset Y:" HorizontalAlignment="Left" Margin="10,141,0,0" VerticalAlignment="Top"/>
-        <Slider x:Name="sldrFOffset" HorizontalAlignment="Left" Margin="163,172,0,0" VerticalAlignment="Top" Width="246" ValueChanged="sldrFOffset_ValueChanged" Maximum="1"/>
+        <Slider x:Name="sldrFOffset" HorizontalAlignment="Left" Margin="163,172,0,0" VerticalAlignment="Top" Width="246" Maximum="1"/>
         <Label Content="F-Key Offset Y:" HorizontalAlignment="Left" Margin="10,168,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbBackground" HorizontalAlignment="Left" Height="23" Margin="163,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"/>
         <Label Content="Background:" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top"/>
