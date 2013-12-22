@@ -33,6 +33,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using FilePath = System.IO.Path;
+using System.Reflection;
 
 namespace EZKey
 {
@@ -206,7 +207,41 @@ namespace EZKey
 
         #endregion
 
+        private Tuple<Func<T>, Action<T>> getHandlers<T>(object instance, FieldInfo field)
+        {
+            return new Tuple<Func<T>, Action<T>>(() => (T)field.GetValue(instance), value => field.SetValue(instance, value));
+        }
+
+        private void bindColors(TextBox codeBox, Button dialogButton, Tuple<Func<Color>, Action<Color>> fieldHandler)
+        {
+            codeBox.TextChanged +=
+                (object sender, TextChangedEventArgs e) =>
+                {
+                    if (initialized)
+                    {
+                        Color? clr = ConvertColor(codeBox.Text);
+                        if (clr != null)
+                        {
+                            fieldHandler.Item2((Color)clr);
+                            dialogButton.Background = new SolidColorBrush((Color)clr);
+                            Manager.TriggerOptionChanged();
+                        }
+                    }
+                };
+
+            dialogButton.Click +=
+                (object sender, RoutedEventArgs e) =>
+                {
+                    Color clr = getColor(fieldHandler.Item1());
+                    fieldHandler.Item2(clr);
+                    dialogButton.Background = new SolidColorBrush(clr);
+                    codeBox.Text = clr.ToString();
+                };
+        }
+
         #region Color Textboxes
+
+       
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
