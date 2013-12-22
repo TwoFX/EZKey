@@ -101,7 +101,7 @@ namespace EZKey
             cbConfigs.SelectedIndex = Manager.currentTheme;
         }
 
-
+        #region Helper Functions
 
         private System.Windows.Media.Color DToM(System.Drawing.Color input)
         {
@@ -112,6 +112,34 @@ namespace EZKey
         {
             return System.Drawing.Color.FromArgb(input.A, input.R, input.G, input.B);
         }
+
+        private Color? ConvertColor(string i)
+        {
+            if (Regex.IsMatch(i, "^#?([0-9a-fA-F]{3,8})$"))
+            {
+                int r = i.Length - i.Count(x => x == '#');
+                string c = i.ToCharArray().Contains('#') ? i : "#" + i;
+                if (r == 3 || r == 4 || r == 6 || r == 8)
+                {
+                    return (Color?)ColorConverter.ConvertFromString(c);
+                }
+            }
+            return null;
+        }
+
+        Color getColor(Color preC)
+        {
+            System.Windows.Forms.ColorDialog cd = new System.Windows.Forms.ColorDialog();
+            cd.Color = MToD(preC);
+            cd.FullOpen = true;
+            cd.SolidColorOnly = true;
+            cd.ShowDialog();
+            return DToM(cd.Color);
+        }
+
+        #endregion
+
+        #region Sliders
 
         private void Slider_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -176,6 +204,10 @@ namespace EZKey
             }
         }
 
+        #endregion
+
+        #region Color Textboxes
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (initialized)
@@ -190,19 +222,7 @@ namespace EZKey
             }
         }
 
-        private Color? ConvertColor(string i)
-        {
-            if (Regex.IsMatch(i, "^#?([0-9a-fA-F]{3,8})$"))
-            {
-                int r = i.Length - i.Count(x => x == '#');
-                string c = i.ToCharArray().Contains('#') ? i : "#" + i;
-                if (r == 3 || r == 4 || r == 6 || r == 8)
-                {
-                    return (Color?)ColorConverter.ConvertFromString(c);
-                }
-            }
-            return null;
-        }
+
 
         private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
@@ -246,6 +266,52 @@ namespace EZKey
             }
         }
 
+        private void tbStrokeKeyStroke_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (initialized)
+            {
+                Color? clr = ConvertColor(tbStrokeKeyStroke.Text);
+                if (clr != null)
+                {
+                    Manager.BorderPressed = (Color)clr;
+                    btnStrokeKeyStroke.Background = new SolidColorBrush((Color)clr);
+                    Manager.TriggerOptionChanged();
+                }
+            }
+        }
+
+        private void tbFont_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (initialized)
+            {
+                Color? clr = ConvertColor(tbFont.Text);
+                if (clr != null)
+                {
+                    Manager.Text = (Color)clr;
+                    btnFont.Background = new SolidColorBrush((Color)clr);
+                    Manager.TriggerOptionChanged();
+                }
+            }
+        }
+
+        private void tbFontPressed_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (initialized)
+            {
+                Color? clr = ConvertColor(tbFontPressed.Text);
+                if (clr != null)
+                {
+                    Manager.TextPressed = (Color)clr;
+                    btnFontPressed.Background = new SolidColorBrush((Color)clr);
+                    Manager.TriggerOptionChanged();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Misc
+
         private void cbMask_Checked(object sender, RoutedEventArgs e)
         {
             Manager.lockMaskEnabled = true;
@@ -277,15 +343,9 @@ namespace EZKey
             btnSetLockKey.Content = "Set";
         }
 
-        Color getColor(Color preC)
-        {
-            System.Windows.Forms.ColorDialog cd = new System.Windows.Forms.ColorDialog();
-            cd.Color = MToD(preC);
-            cd.FullOpen = true;
-            cd.SolidColorOnly = true;
-            cd.ShowDialog();
-            return DToM(cd.Color);
-        }
+        #endregion
+
+        #region Color Buttons
 
         private void btnBackground_Click(object sender, RoutedEventArgs e)
         {
@@ -318,19 +378,7 @@ namespace EZKey
             tbStrokeClr.Text = clr.ToString();
         }
 
-        private void tbStrokeKeyStroke_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (initialized)
-            {
-                Color? clr = ConvertColor(tbStrokeKeyStroke.Text);
-                if (clr != null)
-                {
-                    Manager.BorderPressed = (Color)clr;
-                    btnStrokeKeyStroke.Background = new SolidColorBrush((Color)clr);
-                    Manager.TriggerOptionChanged();
-                }
-            }
-        }
+
 
         private void btnStrokeKeyStroke_Click(object sender, RoutedEventArgs e)
         {
@@ -340,19 +388,7 @@ namespace EZKey
             tbStrokeKeyStroke.Text = clr.ToString();
         }
 
-        private void tbFont_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (initialized)
-            {
-                Color? clr = ConvertColor(tbFont.Text);
-                if (clr != null)
-                {
-                    Manager.Text = (Color)clr;
-                    btnFont.Background = new SolidColorBrush((Color)clr);
-                    Manager.TriggerOptionChanged();
-                }
-            }
-        }
+
 
         private void btnFont_Click(object sender, RoutedEventArgs e)
         {
@@ -362,20 +398,6 @@ namespace EZKey
             tbFont.Text = clr.ToString();
         }
 
-        private void tbFontPressed_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (initialized)
-            {
-                Color? clr = ConvertColor(tbFontPressed.Text);
-                if (clr != null)
-                {
-                    Manager.TextPressed = (Color)clr;
-                    btnFontPressed.Background = new SolidColorBrush((Color)clr);
-                    Manager.TriggerOptionChanged();
-                }
-            }
-        }
-
         private void btnFontPressed_Click(object sender, RoutedEventArgs e)
         {
             Color clr = getColor(Manager.TextPressed);
@@ -383,6 +405,10 @@ namespace EZKey
             btnFontPressed.Background = new SolidColorBrush(clr);
             tbFontPressed.Text = clr.ToString();
         }
+
+        #endregion
+        
+        #region Fonts
 
         private void btnFontFamily_Click(object sender, RoutedEventArgs e)
         {
@@ -413,6 +439,10 @@ namespace EZKey
             Manager.FontS = FontStyles.Normal;
             Manager.TriggerOptionChanged();
         }
+
+        #endregion
+
+        #region Configs
 
         private void btnLoadConf_Click(object sender, RoutedEventArgs e)
         {
@@ -545,5 +575,7 @@ namespace EZKey
         {
             saveToLocation(Manager.cfgPaths[Manager.currentTheme]);
         }
+
+        #endregion
     }
 }
