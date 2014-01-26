@@ -150,12 +150,6 @@ namespace EZKey
                 };
         }
 
-        private Action<object, TArgs> setHandler<TArgs>(Func<TArgs, object> evalArgs, string managerField)
-        {
-            return (sender, e) =>
-                Manager.SetField(managerField, evalArgs(e));
-        }
-
         private void bindColors(TextBox codeBox, Button dialogButton, string managerField)
         {
 
@@ -192,6 +186,7 @@ namespace EZKey
         private void cbMask_Checked(object sender, RoutedEventArgs e)
         {
             Manager.lockMaskEnabled = true;
+            Manager.TriggerOptionChanged();
             tbMask.IsEnabled = true;
         }
 

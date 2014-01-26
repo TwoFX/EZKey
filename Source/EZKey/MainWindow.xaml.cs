@@ -208,17 +208,21 @@ namespace EZKey
                     l.FontFamily = Manager.Font;
                     l.FontWeight = Manager.FontW;
                     l.FontStyle = Manager.FontS;
-                    l.FontSize = Manager.FontSize * 46.0;
+                    
+
+                    double finalFontSize = Manager.FontSize * 46.0;
 
                     FormattedText measurer;
                     do
                     {
                         measurer = new FormattedText(l.Content.ToString(), System.Globalization.CultureInfo.CurrentUICulture,
                             System.Windows.FlowDirection.LeftToRight, new Typeface(Manager.Font, Manager.FontS, Manager.FontW, FontStretches.Medium),
-                            l.FontSize, new SolidColorBrush(Manager.Text));
+                            finalFontSize, new SolidColorBrush(Manager.Text));
 
-                        l.FontSize -= 0.01;
+                        finalFontSize -= 0.25;
                     } while (measurer.Height > c.Height - 12 || measurer.Width > c.Width - 12);
+
+                    l.FontSize = finalFontSize;
 
                     l.Foreground = new SolidColorBrush(Manager.Text);
                     l.Margin = new Thickness(c.Margin.Left, c.Margin.Top, 0, 0);
