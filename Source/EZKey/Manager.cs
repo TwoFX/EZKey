@@ -34,16 +34,19 @@ namespace EZKey
         public delegate void OptionChangedHandler();
         public static OptionChangedHandler OptionChanged;
         public static KeyHandler KeyUp, KeyDown;
+#pragma warning disable 0649 // Reflection
         public static Color Background, Foreground, ForegroundPressed, Text, TextPressed, Border, BorderPressed;
         public static double BorderThickness, Roundness, Size, OffsetX, OffsetY, BasicOffsetX, BasicOffsetY, tOffsetY, FontSize; // Is Roundness a word? Whatever..
+        public static FontFamily Font;
+        public static FontWeight FontW;
+        public static FontStyle FontS;
+#pragma warning restore 0649
         public static bool lockMaskEnabled;
         public static int lockKey;
         public static string lockSymbol;
         public static Dictionary<int, int> Layout = LanguagePacks.enUS;
         public static string[] Lables = LanguagePacks.enUSlbl;
-        public static FontFamily Font;
-        public static FontWeight FontW;
-        public static FontStyle FontS;
+
 
         public static Color dBackground, dForeground, dForegroundPressed, dText, dTextPressed, dBorder, dBorderPressed;
         public static double dBorderThickness, dRoundness, dSize, dOffsetX, dOffsetY, dBasicOffsetX, dBasicOffsetY, dtOffsetY, dFontSize; // Is Roundness a word? Whatever..

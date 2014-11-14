@@ -333,6 +333,7 @@ namespace EZKey
             if (cbConfigs.SelectedIndex == 0)
             {
                 Manager.LoadStandards();
+                Manager.TriggerOptionChanged();
             }
             else
             {

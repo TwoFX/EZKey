@@ -51,6 +51,7 @@ namespace EZKey
         private string[] lbls = Manager.Lables;
         private int keyDex = 71; // Highest index of keys
         private bool lockMode = false;
+        private Options options;
 
         public MainWindow()
         {
@@ -241,7 +242,14 @@ namespace EZKey
         private void Window_MouseDown_1(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Middle)
-                new Options().Show();
+            {
+                if (options == null)
+                {
+                    options = new Options();
+                    options.Closed += (__, _) => options = null;
+                }
+                options.Show();
+            }
         }
 
         private void grid_MouseEnter(object sender, MouseEventArgs e)
@@ -259,7 +267,12 @@ namespace EZKey
 
         private void lblClose_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            new Options().Show();
+            if (options == null)
+            {
+                options = new Options();
+                options.Closed += (__, _) => options = null;
+            }
+            options.Show();
         }
 
         private void lblLayout_MouseDown(object sender, MouseButtonEventArgs e)
