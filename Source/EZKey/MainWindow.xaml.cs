@@ -137,7 +137,7 @@ namespace EZKey
             {
                 x = baseKey.Item3.Left;
                 //double rightBaseline = Manager.BasicOffsetX * 80.0 + 24 * Manager.Size * (5 + 336 * Manager.OffsetX);
-                double rightBaseline = Manager.BasicOffsetX * 80.0 + 1830 * Manager.Size + 450 * Manager.OffsetX;
+                double rightBaseline = Manager.BasicOffsetX * 80.0 + 1800 * Manager.Size + 390 * Manager.OffsetX;
                 width = rightBaseline - baseKey.Item3.Left;
             }
             else
@@ -151,6 +151,7 @@ namespace EZKey
 
         private void setOptions()
         {
+            double rightBaseline = Manager.BasicOffsetX * 80.0 + 1800 * Manager.Size + 390 * Manager.OffsetX;
             for (int i = 0; i < keyDex; i++)
             {
                 if (i != 1 && i != 53)
@@ -167,10 +168,37 @@ namespace EZKey
                         c.Width = dims.Item2;
                         c.Margin = dims.Item3;
                     }
+                    else if (i < 58)
+                    {
+                        switch (i)
+                        {
+                            case 55: // Left Ctrl Key
+                                c.Height = Manager.Size * 120.0;
+                                c.Width = Manager.Size * 120.0;
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0, Manager.BasicOffsetY * 80.0 + Manager.OffsetY * 20.0 * 5 * Manager.Size * 4 + Manager.Size * 120 * 5 + Manager.tOffsetY * 25 * Manager.Size * 4, 0, 0);
+                                break;
+                            case 56: // Space Bar
+                                c.Height = Manager.Size * 120.0;
+                                c.Width = rightBaseline - (Manager.BasicOffsetY * 80 + 2 * Manager.Size * 120 + 2 * Manager.OffsetX * 30);
+                                c.Margin = new Thickness(Manager.BasicOffsetX * 80.0 + Manager.Size * 120 + Manager.OffsetX * 30, Manager.BasicOffsetY * 80.0 + Manager.OffsetY * 20.0 * 5 * Manager.Size * 4 + Manager.Size * 120 * 5 + Manager.tOffsetY * 25 * Manager.Size * 4, 0, 0);
+                                break;
+                            case 57: // Right Ctrl Key
+                                c.Height = Manager.Size * 120.0;
+                                c.Width = Manager.Size * 120.0;
+                                c.Margin = new Thickness(rightBaseline - Manager.Size * 120, Manager.BasicOffsetY * 80.0 + Manager.OffsetY * 20.0 * 5 * Manager.Size * 4 + Manager.Size * 120 * 5 + Manager.tOffsetY * 25 * Manager.Size * 4, 0, 0);
+                                break;
+                        }
+                    }
                     else if (i < 70) // F1 - F12
                     {
                         c.Height = c.Width = Manager.Size * 120.0;
-                        c.Margin = new Thickness(Manager.BasicOffsetY * 80.0 + (8 + i * 4 - 232 + Math.Floor((i - 58) / 4.0) * 2) * Manager.OffsetX * 36.0 * Manager.Size * 4, Manager.BasicOffsetY * 80.0, 0, 0);
+                        
+                        double x = Manager.BasicOffsetX * 80.0 + // Basic Offset
+                                    ((i - 58) / 4) * (Manager.Size * 120.0 * 0.5) + // F-Key Spacing
+                                    (i - 56) * (Manager.Size * 120) + // Preceding keys
+                                    (i - 56) * (Manager.OffsetX * 30); // Preceding offsets
+                        double y = Manager.BasicOffsetY * 80.0;
+                        c.Margin = new Thickness(x, y, 0, 0);
                     }
                     else // Escape Key
                     {
@@ -189,14 +217,16 @@ namespace EZKey
                     double finalFontSize = Manager.FontSize * 46.0;
 
                     FormattedText measurer;
+                    SolidColorBrush brush = new SolidColorBrush(Manager.Text);
+                    Typeface face = new Typeface(Manager.Font, Manager.FontS, Manager.FontW, FontStretches.Medium);
                     do
                     {
                         measurer = new FormattedText(l.Content.ToString(), System.Globalization.CultureInfo.CurrentUICulture,
-                            System.Windows.FlowDirection.LeftToRight, new Typeface(Manager.Font, Manager.FontS, Manager.FontW, FontStretches.Medium),
-                            finalFontSize, new SolidColorBrush(Manager.Text));
+                            System.Windows.FlowDirection.LeftToRight, face,
+                            finalFontSize, brush);
 
                         finalFontSize -= 0.25;
-                    } while (measurer.Height > c.Height - 12 || measurer.Width > c.Width - 12);
+                    } while ((measurer.Height > c.Height - 12 || measurer.Width > c.Width - 12) && finalFontSize > 0.25);
 
                     l.FontSize = finalFontSize;
 

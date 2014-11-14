@@ -330,18 +330,18 @@ namespace EZKey
 
         private void cbConfigs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbConfigs.SelectedIndex == 0)
-            {
-                Manager.LoadStandards();
-                Manager.TriggerOptionChanged();
-            }
-            else
-            {
-                parseConfigFile(Manager.cfgPaths[cbConfigs.SelectedIndex]);
-            }
-            Manager.currentTheme = cbConfigs.SelectedIndex;
             if (this.IsLoaded)
             {
+                if (cbConfigs.SelectedIndex == 0)
+                {
+                    Manager.LoadStandards();
+                    Manager.TriggerOptionChanged();
+                }
+                else
+                {
+                    parseConfigFile(Manager.cfgPaths[cbConfigs.SelectedIndex]);
+                }
+                Manager.currentTheme = cbConfigs.SelectedIndex;
                 new Options(this.Left, this.Top).Show();
                 this.Close();
             }
